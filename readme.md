@@ -1,7 +1,5 @@
-# Winamp Classic DeClassified
+# Refugee DeClassified
 
-This is an attempt at loading Classic Skins in their intended form as Modern Skins, with the idea being that one can (mostly) easily make ports of their own Classic Skins to the Modern Skin platform, giving more options in customizablility that Classic Skins simply don't have.
+This is a variant of the Refugee / Fusion AmpDeck skin based off of Eris's DeClassified WIP skin. :)
 
-Currently uses the older Winamp 2.x base skin as a reference pointer.
-
-![Screenshot](https://raw.githubusercontent.com/0x5066/DeClassified/main/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/SameytheHedgehog/Refugee-DeClassified/main/screenshot.png)
