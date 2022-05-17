@@ -120,30 +120,59 @@
 </groupdef>
 
 <groupdef id="waclassicvis">
-	<vis id="wa.vis" y="0" w="72" h="16" fps="60"
-	ColorBand1="24,132,8"
-    ColorBand2="41,148,0"
-    ColorBand3="49,156,8"
-    ColorBand4="57,181,16"
-    ColorBand5="50,190,16"
-    ColorBand6="41,206,16"
-    ColorBand7="148,222,33"
-    ColorBand8="189,222,41"
-    ColorBand9="214,181,33"
-    ColorBand10="222,165,24"
-    ColorBand11="198,123,8"
-    ColorBand12="214,115,0"
-    ColorBand13="214,102,0"
-    ColorBand14="214,90,0"
-    ColorBand15="206,41,16"
-    ColorBand16="239,49,16"
+	<vis id="wa.vis" y="0" w="75" h="16" fps="60"
+    ColorBand1="0,5,10"
+    ColorBand2="1,10,21"
+    ColorBand3="2,15,32"
+    ColorBand4="2,20,43"
+    ColorBand5="3,25,54"
+    ColorBand6="4,30,65"
+    ColorBand7="4,35,76"
+    ColorBand8="5,40,87"
+    ColorBand9="5,45,98"
+    ColorBand10="6,50,109"
+    ColorBand11="7,55,120"
+    ColorBand12="7,60,131"
+    ColorBand13="8,65,142"
+    ColorBand14="9,70,153"
+    ColorBand15="10,75,164"
+	ColorBand16="10,104,232"
 	colorbandpeak="150,150,150"
 
-    colorosc1="255,255,255"
-    colorosc2="214,214,222"
-    colorosc3="181,189,189"
-    colorosc4="160,170,175"
-    colorosc5="148,156,165"/>
+    colorosc1="10,104,232"
+    colorosc2="109,127,187"
+    colorosc3="150,150,150"
+    colorosc4="109,122,165"
+    colorosc5="10,75,164"/>
+	<layer id="main.vis.trigger" w="75" h="16"/>
+	<script file="scripts/wa2visualizer.maki"/>
+</groupdef>
+
+<groupdef id="waclassicvis2">
+	<vis id="wa.vis" y="0" w="72" h="16" fps="60"
+    ColorBand1="0,5,10"
+    ColorBand2="1,10,21"
+    ColorBand3="2,15,32"
+    ColorBand4="2,20,43"
+    ColorBand5="3,25,54"
+    ColorBand6="4,30,65"
+    ColorBand7="4,35,76"
+    ColorBand8="5,40,87"
+    ColorBand9="5,45,98"
+    ColorBand10="6,50,109"
+    ColorBand11="7,55,120"
+    ColorBand12="7,60,131"
+    ColorBand13="8,65,142"
+    ColorBand14="9,70,153"
+    ColorBand15="10,75,164"
+	ColorBand16="10,104,232"
+	colorbandpeak="150,150,150"
+
+    colorosc1="10,104,232"
+    colorosc2="109,127,187"
+    colorosc3="150,150,150"
+    colorosc4="109,122,165"
+    colorosc5="10,75,164"/>
 	<layer id="main.vis.trigger" w="72" h="16"/>
 	<script file="scripts/wa2visualizer.maki"/>
 </groupdef>

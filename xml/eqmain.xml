@@ -19,7 +19,7 @@
         <button id="0db" x="45" y="65" w="20" h="7" rectrgn="1"/>
         <button id="-12db" x="44" y="95" w="22" h="7" rectrgn="1"/>
 
-        <eqvis x="88" y="17" w="109" h="19" colortop="239,24,16" colormiddle="239,231,49" colorbottom="24,156,8" colorpreamp="156,181,206"/>
+        <eqvis x="88" y="17" w="109" h="19" colortop="0,61,123" colormiddle="0,83,165" colorbottom="0,113,226" colorpreamp="3,54,108"/>
 			<layer id="preamp_layer" x="21" y="38" image="eq.slider0"/>
 			<layer id="eq1back" x="78" y="38" image="eq.slider0"/>
 			<layer id="eq2back" x="96" y="38" image="eq.slider0"/>
