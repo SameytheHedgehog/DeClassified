@@ -17,8 +17,8 @@
     <text id="timer" text="Time: " x="-2" y="42" font="wasabi.font.default" align="left" valign="top"/>
     <text id="isthiswacup" text="Is this WACUP?: " x="-2" y="49" font="wasabi.font.default" align="left" valign="top"/>
 
-    <text text="DECLASSIFIED" x="0" y="53" w="380" font="Winamp" align="center" fontsize="43" valign="top"/>
-    <text text="Using the Winamp 2.9beta base skin for reference." x="0" y="86" w="380" font="tahoma" align="center" fontsize="14" valign="top" antialias="0"/>
+    <text text="REFUGEE DECLASSIFIED" x="2" y="67" w="350" font="Winamp" align="left" fontsize="25" valign="top"/>
+    <text text=" From before Winamp v1.74 to WACUP, with love. Thanks Eris!" x="0" y="86" w="350" font="tahoma" align="left" fontsize="14" valign="top" antialias="0"/>
 
 <script file="about/wa2songtimer_about.maki"/>
 <script file="about/classicplaystatus_about.maki"/>
