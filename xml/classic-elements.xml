@@ -100,6 +100,17 @@
 
 	<bitmap id="clutterbar" file="skin/titlebar.png" x="304" y="0" w="8" h="43"/>
 
+	<bitmap id="CLBO" file="skin/titlebar.png" x="305" y="2" w="7" h="8"/>
+	<bitmap id="CLBOp" file="skin/titlebar.png" x="305" y="46" w="7" h="8"/>
+	<bitmap id="CLBA" file="skin/titlebar.png" x="305" y="10" w="7" h="8"/>
+	<bitmap id="CLBAp" file="skin/titlebar.png" x="313" y="54" w="7" h="8"/>
+	<bitmap id="CLBI" file="skin/titlebar.png" x="305" y="18" w="7" h="8"/>
+	<bitmap id="CLBIp" file="skin/titlebar.png" x="321" y="62" w="7" h="8"/>
+	<bitmap id="CLBD" file="skin/titlebar.png" x="305" y="26" w="7" h="8"/>
+	<bitmap id="CLBDp" file="skin/titlebar.png" x="329" y="70" w="7" h="8"/>
+	<bitmap id="CLBV" file="skin/titlebar.png" x="305" y="34" w="7" h="8"/>
+	<bitmap id="CLBVp" file="skin/titlebar.png" x="337" y="78" w="7" h="8"/>
+
 	<bitmap id="volume" file="skin/volume.png" x="0" y="0" w="68" h="420"/>
 	<bitmap id="volbtnd" file="skin/volume.png" x="0" y="422" w="14" h="11"/>
 	<bitmap id="volbtn" file="skin/volume.png" x="15" y="422" w="14" h="11"/>
