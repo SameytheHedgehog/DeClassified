@@ -2,11 +2,13 @@
 
 <WinampAbstractionLayer version="1.35">
 	<skininfo>
-		<version>-</version>
-		<name>-</name>
-		<comment>-</comment>
-		<author>-</author>
-		<email>-</email>
+		<version>0.99</version>
+		<name>Refugee DeClassified</name>
+		<comment>Everybodies favorite reskin of Fusion AmpDeck. Now in Maki Flavor! https://github.com/SameytheHedgehog/Refugee-DeClassified
+		Based off of Eris Lund's DeClassified modern skin found here: https://github.com/0x5066/DeClassified	
+		Original Fusion AmpDeck skin by Blayde (more Fusion AmpDeck credits and stuff in Fusion_Readme.txt and Fusion_AMPdeck.txt)</comment>
+		<author>Samey the Hedgehog, Blayde, and various others.</author>
+		<email>superzander369@gmail.com</email>
 		<wacupscreenshot>wacupscreenshot.png</wacupscreenshot>
 		<screenshot>screenshot.png</screenshot>
 	</skininfo>
@@ -48,10 +50,5 @@
 
 	<!-- About the skin -->
 	<include file="about/about.xml"/> 
-	
-	<!-- Skin Credits:
-	Original Fusion AmpDeck skin by Blayde (more Fusion AmpDeck credits and stuff in the Fusion_Readme.txt & Fusion_AMPdeck.txt)
-	Current Refugee skin is by Samey
-	DeClassified modern skin base by Eris Lund -->
 
 </WinampAbstractionLayer>
