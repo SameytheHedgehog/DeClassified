@@ -121,7 +121,7 @@
 
 	<group id="sliders" x="107" y="57" h="13"/>
 
-	<togglebutton id="AboutWinamp" x="251" y="91" w="14" h="16" rectrgn="1" action="TOGGLE" param="guid:{D6201408-476A-4308-BF1B-7BACA1124B12}" cursor="cur.normal"/>
+	<togglebutton id="AboutWinamp" x="251" y="91" w="14" h="16" rectrgn="1" action="TOGGLE" param="guid:{D6201408-476A-4308-BF1B-7BACA1124B12}" cursor="cur.mainmenu"/> <!-- should be cursor="cur.normal" but I thought it was cooler -->
 
 </groupdef>	
 
