@@ -48,5 +48,10 @@
 
 	<!-- About the skin -->
 	<include file="about/about.xml"/> 
+	
+	<!-- Skin Credits:
+	Original Fusion AmpDeck skin by Blayde (more Fusion AmpDeck credits and stuff in the Fusion_Readme.txt & Fusion_AMPdeck.txt)
+	Current Refugee skin is by Samey
+	DeClassified modern skin base by Eris Lund -->
 
 </WinampAbstractionLayer>
