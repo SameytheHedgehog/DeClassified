@@ -164,7 +164,7 @@
 </groupdef>
 
 <groupdef id="waclassicvis2">
-	<vis id="wa.vis" y="0" w="72" h="16" fps="60"
+	<vis id="wa.vis2" y="0" w="72" h="16" fps="60"
     ColorBand1="0,5,10"
     ColorBand2="1,10,21"
     ColorBand3="2,15,32"
@@ -188,8 +188,8 @@
     colorosc3="150,150,150"
     colorosc4="109,122,165"
     colorosc5="10,75,164"/>
-	<layer id="main.vis.trigger" w="72" h="16" cursor="cur.normal"/>
-	<script file="scripts/wa2visualizer.maki"/>
+	<layer id="main.vis2.trigger" w="72" h="16" cursor="cur.normal"/>
+	<script file="scripts/wa2PLvisualizer.maki"/>
 </groupdef>
 
 <groupdef id="shademain">
