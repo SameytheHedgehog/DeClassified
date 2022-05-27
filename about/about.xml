@@ -25,7 +25,7 @@
     <text id="VUL" text="VU LEFT : " x="-2" y="56" font="wasabi.font.default" align="left" valign="top" alpha="0" cursor="cur.normal"/>
     <text id="VUR" text="VU RIGHT: " x="-2" y="63" font="wasabi.font.default" align="left" valign="top" alpha="0" cursor="cur.normal"/>
 
-    <text text="REFUGEE DECLASSIFIED" x="2" y="67" w="350" color="x50" font="Winamp" align="left" fontsize="25" valign="top"/>
+    <text text="REFUGEE DECLASSIFIED" x="2" y="67" w="350" color="x50" font="Winamp" align="left" fontsize="25" valign="top" cursor="cur.normal"/>
     <text text="From before Winamp v1.74 to WACUP, with love. Thanks Eris!" x="3" y="91" w="350" font="studio.component.title.old" align="left" fontsize="14" valign="top" antialias="0" cursor="cur.normal"/>
     <text id="blurrytext" text="From before Winamp v1.74 to WACUP, with love. Thanks Eris!." x="3" y="90" w="350" color="x50" font="studio.component.title.blur" align="left" fontsize="14" valign="top" antialias="0" cursor="cur.normal"/>
 
