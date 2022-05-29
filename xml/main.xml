@@ -90,10 +90,12 @@
 
 	<script file="scripts/classicplaystatus.maki"/>
 
-	<text id="mixrate" display="songsamplerate" x="154" y="43" w="12" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/>	
-	<text id="bitrate" display="songbitrate" x="109" y="43" w="17" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/>	
+	<!--text id="mixrate" display="songsamplerate" x="154" y="43" w="12" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/>	
+	<text id="bitrate" display="songbitrate" x="109" y="43" w="17" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/-->	
 
-	<script file="scripts/winamp1kbps.maki"/>
+	<text id="mixrate" display="songinfo" x="108" y="43" w="155" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/>
+
+	<!--script file="scripts/winamp1kbps.maki"/-->
 
 	<button id="wabtn.previous" action="PREV" 	x="16" y="88" 	image="prev"	downimage="prevp"	tooltip="Previous Track" cursor="cur.normal"/>	
 	<button id="wabtn.play" action="PLAY" 		x="39" y="88" 	image="play"	downimage="playp"	tooltip="Play"			cursor="cur.normal"/>	
@@ -114,10 +116,10 @@
 	<button id="eq" action="TOGGLE" param="eq" x="219" y="58" image="player.toggler.eq.disabled" downImage="player.toggler.eq.pressed" activeImage="player.toggler.eq.enabled" tooltip="Toggle Equalizer" cursor="cur.normal"/>
 	<button id="pl" action="TOGGLE" param="guid:pl" x="242" y="58" image="player.toggler.pl.disabled" downImage="player.toggler.pl.pressed" activeImage="player.toggler.pl.enabled" tooltip="Toggle Playlist Editor" cursor="cur.normal"/>
 
-	<layer id="mono" x="212" y="41" w="27" h="12" image="player.status.mono.inactive" cursor="cur.normal"/>
+	<!--layer id="mono" x="212" y="41" w="27" h="12" image="player.status.mono.inactive" cursor="cur.normal"/>
 	<layer id="stereo" x="239" y="41" w="29" h="12" image="player.status.stereo.inactive" cursor="cur.normal"/>
 
-	<script file="scripts/monoster.maki"/>
+	<script file="scripts/monoster.maki"/-->
 
 	<group id="sliders" x="107" y="57" h="13"/>
 
