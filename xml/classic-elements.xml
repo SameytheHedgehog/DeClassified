@@ -185,7 +185,7 @@
 	<bitmap id="mb.closep" file="skin/mb.png" x="148" y="42" h="9" w="9"/>
 
 	<bitmap id="mb.back" file="skin/mb.png" x="9" y="51" h="18" w="15"/>
-	<bitmap id="mb.backp" file="skin/mb.png" x="158" y="42" h="18" w="15"/>
+	<bitmap id="mb.backp" file="skin/mb.png" x="159" y="42" h="18" w="15"/>
 
 	<bitmap id="mb.forward" file="skin/mb.png" x="24" y="51" h="18" w="15"/>
 	<bitmap id="mb.forwardp" file="skin/mb.png" x="173" y="42" h="18" w="15"/>
