@@ -1,8 +1,9 @@
-#include "lib/std.mi"
+#include "..\..\..\lib/std.mi"
 
 Global Group tipGroup;
 Global Text tipText;
-Global GuiObject tipBorder, tipBG;
+Global GuiObject tipBorder;
+Global Layer tipBG;
 Global Double layoutscale;
 
 Global Container containerMain;
@@ -26,14 +27,19 @@ tipText.onTextChanged(String newtext) {
   //poll scale factor
   layoutscale = layoutMainNormal.getScale();
   if(layoutscale < 1) layoutscale = 1;
+  if(layoutscale > 1) tipText.setXmlParam("antialias", "1");
+  else tipText.setXmlParam("antialias", "0");
 
   tipText.setXmlParam("fontsize", IntegerToString(14*layoutscale));
   tipText.setXmlParam("x", IntegerToString(1*layoutscale));
   tipText.setXmlParam("y", IntegerToString(1*layoutscale));
   tipBorder.setXmlParam("h", IntegerToString(17*layoutscale));
   tipBG.setXmlParam("h", IntegerToString((17*layoutscale)-2));
+  //tipBorder.setAlpha(0);
+  //tipBG.setAlpha(0);
 
-  int w = getTextWidth();
+  if(layoutscale >= 2) int w = getTextWidth()+4;
+  else w = getTextWidth();
   int h = tipGroup.getHeight()*layoutscale;
 
   int x = getMousePosX();
@@ -51,7 +57,19 @@ tipText.onTextChanged(String newtext) {
   if (y < vptop) y = vptop + 32; // avoid mouse
   if (y + h > vpbottom) { h = vpbottom-vptop-64; y = 32; }
 
-  if(layoutscale >= 2) tipGroup.resize(x, y, w+4, h);
-  else tipGroup.resize(x, y, w, h);
+  if(layoutscale >= 2) tipGroup.resize(getMousePosX(), y, 0, h);
+  else tipGroup.resize(getMousePosX(), y, 0, h);
 
+  //tipBorder.setTargetA(255);
+  //tipBorder.gotoTarget();
+  //tipBorder.setTargetSpeed(0.25);
+
+  //tipBG.setTargetA(255);
+  //tipBG.gotoTarget();
+  //tipBG.setTargetSpeed(0.25);
+
+  tipGroup.setTargetW(w);
+  tipGroup.setTargetX(x);
+  tipGroup.setTargetSpeed(0.35);
+  tipGroup.gotoTarget();
 }
