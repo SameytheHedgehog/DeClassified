@@ -49,7 +49,8 @@
 		w="154" h="9"
 		font="wasabi.font.default" altfont="arial" fontsize="13"
 		altvalign="center" dblclickaction="trackinfo" 
-	rightclickaction="trackmenu" cursor="cur.horizslider"
+		rightclickaction="trackmenu" cursor="cur.horizslider"
+		tooltip="Song Title (right-click for options)"
 	/>
 
 	<text id="infoticker" x="110" y="27" offsetx="-1" offsety="-1"
@@ -107,7 +108,7 @@
 
 	<layer id="wa.titlebar" x="0" y="0" image="wa.titlebar.on" inactiveimage="wa.titlebar.off" ghost="1"/>
 
-	<button id="wa.sysmenu" action="SYSMENU" x="6" y="3" image="menu" downimage="menup" activealpha="255" inactivealpha="0" tooltip="Winamp Menu" cursor="cur.mainmenu"/>	
+	<button id="wa.sysmenu" action="SYSMENU" x="6" y="3" image="menu" downimage="menup" activealpha="255" inactivealpha="0" tooltip="" cursor="cur.mainmenu"/>	
 
 	<button id="wa.minimize" x="244" y="3" action="MINIMIZE" image="mini" downimage="minip" tooltip="Minimize" activealpha="255" inactivealpha="0" cursor="cur.minimise"/>
 	<button id="wa.switch" x="254" y="3" action="SWITCH" param="shade" image="switch" downimage="switchp" tooltip="Toggle Windowshade Mode" activealpha="255" inactivealpha="0" cursor="cur.normal"/>
@@ -123,7 +124,7 @@
 
 	<group id="sliders" x="107" y="57" h="13"/>
 
-	<togglebutton id="AboutWinamp" x="251" y="91" w="14" h="16" rectrgn="1" action="TOGGLE" param="guid:{D6201408-476A-4308-BF1B-7BACA1124B12}" cursor="cur.mainmenu"/> <!-- should be cursor="cur.normal" but I thought it was cooler -->
+	<togglebutton id="AboutWinamp" x="251" y="91" w="14" h="16" rectrgn="1" action="TOGGLE" param="guid:{D6201408-476A-4308-BF1B-7BACA1124B12}" cursor="cur.mainmenu" tooltip=""/> <!-- should be cursor="cur.normal" but I thought it was cooler -->
 
 </groupdef>	
 
@@ -238,11 +239,11 @@
     colorosc5="10,75,164"/>
 	<layer id="main.vis.trigger" x="79" y="5" w="38" h="5" cursor="cur.normal"/>
 
-    <button id="winshade" inactivealpha="0" action="SWITCH" param="normal" x="254" y="3" image="wa2.player.title.shademode" downImage="wa2.player.title.shademode.pressed" cursor="cur.normal"/>
+    <button id="winshade" inactivealpha="0" action="SWITCH" param="normal" x="254" y="3" image="wa2.player.title.shademode" downImage="wa2.player.title.shademode.pressed" cursor="cur.normal" tooltip="Toggle Windowshade Mode"/>
     <button id="Close" inactivealpha="0" action="close" x="264" y="3" image="wa2.player.title.quit" downImage="wa2.player.title.quit.pressed" tooltip="Close" cursor="cur.close"/>
     <button id="Minimize" inactivealpha="0" action="MINIMIZE" x="244" y="3" image="wa2.player.title.min" downImage="wa2.player.title.min.pressed" tooltip="Minimize Winamp" cursor="cur.minimise"/>
-    <button id="sysbutton" inactivealpha="0" action="SYSMENU" x="6" y="3" image="wa2.player.shade.menu" downImage="wa2.player.shade.menu.pressed" cursor="cur.mainmenu"/>
-    <slider id="seeker" action="seek" x="227" y="4" h="7" w="15" thumb="posbarsm" cursor="cur.horizslider"/>
+    <button id="sysbutton" inactivealpha="0" action="SYSMENU" x="6" y="3" image="wa2.player.shade.menu" downImage="wa2.player.shade.menu.pressed" cursor="cur.mainmenu" tooltip=""/>
+    <slider id="seeker" action="seek" x="227" y="4" h="7" w="15" thumb="posbarsm" cursor="cur.horizslider" tooltip="Seeking Bar"/>
 	<script file="scripts/setShadePosbar.maki"/>
 
 <script file="scripts/wa2visualizer.maki"/>
