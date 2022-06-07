@@ -53,9 +53,9 @@
 	<bitmap id="repp" file="skin/shufrep.png" x="0" y="15" w="28" h="15"/>
 	<bitmap id="repa" file="skin/shufrep.png" x="0" y="30" w="28" h="15"/>
 
-	<bitmap id="shuf" file="skin/shufrep.png" x="28" y="0" h="15" w="47"/>
-	<bitmap id="shufp" file="skin/shufrep.png" x="28" y="15" h="15" w="47"/>
-	<bitmap id="shufa" file="skin/shufrep.png" x="28" y="30" h="15" w="47"/>
+	<bitmap id="shuf" file="skin/shufrep.png" x="46" y="0" h="15" w="29"/>
+	<bitmap id="shufp" file="skin/shufrep.png" x="46" y="15" h="15" w="29"/>
+	<bitmap id="shufa" file="skin/shufrep.png" x="46" y="30" h="15" w="29"/>
 
 	<bitmap id="player.toggler.eq.disabled" file="skin/shufrep.png" x="0" y="61" h="12" w="23"/>
 	<bitmap id="player.toggler.eq.pressed" file="skin/shufrep.png" x="46" y="73" h="12" w="23"/>
