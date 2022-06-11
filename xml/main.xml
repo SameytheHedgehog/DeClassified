@@ -90,8 +90,8 @@
 
 	<script file="scripts/classicplaystatus.maki"/>
 
-	<!--text id="mixrate" display="songsamplerate" x="154" y="43" w="12" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/>	
-	<text id="bitrate" display="songbitrate" x="109" y="43" w="17" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/-->	
+	<!--text id="mixrate" display="songsamplerate" x="154" y="43" w="12" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal" color="x50"/>	
+	<text id="bitrate" display="songbitrate" x="109" y="43" w="17" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal" color="x50"//-->	
 
 	<text id="mixrate" display="songinfo" x="108" y="43" w="155" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/>
 
@@ -156,7 +156,6 @@
     ColorBand15="10,75,164"
 	ColorBand16="10,104,232"
 	colorbandpeak="150,150,150"
-
     colorosc1="10,104,232"
     colorosc2="109,127,187"
     colorosc3="150,150,150"
@@ -164,6 +163,35 @@
     colorosc5="10,75,164"/>
 	<layer id="main.vis.trigger" w="75" h="16" cursor="cur.normal"/>
 	<script file="scripts/wa2visualizer.maki"/>
+</groupdef>
+
+<groupdef id="waclassicvis2">
+	<vis id="wa.vis2" y="0" w="72" h="16" fps="60"
+    ColorBand1="0,5,10"
+    ColorBand2="1,10,21"
+    ColorBand3="2,15,32"
+    ColorBand4="2,20,43"
+    ColorBand5="3,25,54"
+    ColorBand6="4,30,65"
+    ColorBand7="4,35,76"
+    ColorBand8="5,40,87"
+    ColorBand9="5,45,98"
+    ColorBand10="6,50,109"
+    ColorBand11="7,55,120"
+    ColorBand12="7,60,131"
+    ColorBand13="8,65,142"
+    ColorBand14="9,70,153"
+    ColorBand15="10,75,164"
+	ColorBand16="10,104,232"
+	colorbandpeak="150,150,150"
+
+    colorosc1="10,104,232"
+    colorosc2="109,127,187"
+    colorosc3="150,150,150"
+    colorosc4="109,122,165"
+    colorosc5="10,75,164"/>
+	<layer id="main.vis2.trigger" w="72" h="16" cursor="cur.normal"/>
+	<script file="scripts/wa2PLvisualizer.maki"/>
 </groupdef>
 
 <groupdef id="shademain">

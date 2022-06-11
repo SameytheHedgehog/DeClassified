@@ -56,35 +56,7 @@
 		<button image="wa2.pl.close" downImage="wa2.pl.closep" inactiveAlpha="0" x="-11" y="3" relatx="1" relaty="0" action="Close" rectrgn="1" cursor="cur.close" tooltip="Close"
 		/>
 		<!-- Playlist Shade -->
-		<button id="winshade" action="SWITCH" param="shadepl" x="-21" y="3" relatx="1" relaty="0" image="wa2.pl.shade" downImage="wa2.pl.shadep" inactiveAlpha="0" cursor="cur.normal"/>
-	<groupdef id="waclassicvis2">
-		<vis id="wa.vis2" y="0" w="75" h="16" fps="60"
-		ColorBand1="0,5,10"
-		ColorBand2="1,10,21"
-		ColorBand3="2,15,32"
-		ColorBand4="2,20,43"
-		ColorBand5="3,25,54"
-		ColorBand6="4,30,65"
-		ColorBand7="4,35,76"
-		ColorBand8="5,40,87"
-		ColorBand9="5,45,98"
-		ColorBand10="6,50,109"
-		ColorBand11="7,55,120"
-		ColorBand12="7,60,131"
-		ColorBand13="8,65,142"
-		ColorBand14="9,70,153"
-		ColorBand15="10,75,164"
-		ColorBand16="10,104,232"
-		colorbandpeak="150,150,150"
-
-		colorosc1="10,104,232"
-		colorosc2="109,127,187"
-		colorosc3="150,150,150"
-		colorosc4="109,122,165"
-		colorosc5="10,75,164"/>
-		<layer id="main.vis.trigger" w="72" h="16" cursor="cur.normal"/>
-		<script file="scripts/wa2PLvisualizer.maki"/>
-	</groupdef>
+		<button id="winshade" action="SWITCH" param="shadepl" x="-21" y="3" relatx="1" relaty="0" image="wa2.pl.shade" downImage="wa2.pl.shadep" inactiveAlpha="0" cursor="cur.normal" tooltip="Toggle Windowshade Mode"/>
 	</layout>
     <layout id="shadepl" background="wasabi.frame.basetexture" minimum_h="14" maximum_h="14" minimum_w="275" linkwidth="normal">
 
