@@ -22,13 +22,14 @@ Note:		Ripped from Winamp Modern, removed the VU Meter section
 
 Function refreshVisSettings();
 Function setVis (int mode);
-Function setVis2 (int mode2);
 Function ProcessMenuResult (int a);
-Function ProcessMenuResult2 (int a);
 Function LegacyOptions(int legacy);
 Function setVisModeLBD();
-Function setVisModeLBD2();
 Function setVisModeRBD();
+/*------Playlist Vis Stuff------*/
+Function setVis2 (int mode2);
+Function ProcessMenuResult2 (int a);
+Function setVisModeLBD2();
 Function setVisModeRBD2();
 
 Global Group MainWindow, MainClassicVis, Clutterbar;
@@ -40,13 +41,14 @@ Global Vis MainVisualizer, MainShadeVisualizer, PLVisualizer;
 Global Button CLBV1, CLBV2, CLBV3;
 
 Global PopUpMenu visMenu;
-Global PopUpMenu visMenu2;
 Global PopUpMenu pksmenu;
 Global PopUpMenu anamenu;
 Global PopUpMenu anasettings;
 Global PopUpMenu oscsettings;
 Global PopUpMenu stylemenu;
 Global PopUpMenu fpsmenu;
+/*------Playlist Menu------*/
+Global PopUpMenu visMenu2;
 
 Global Int currentMode, currentMode2, a_falloffspeed, p_falloffspeed, osc_render, ana_render, a_coloring, v_fps;
 Global Boolean show_peaks, isShade, compatibility;
@@ -107,7 +109,7 @@ setVisModeLBD(){
 	setVis (currentMode);
 	complete;
 }
-
+/*------Change Playlist Vis on left-click------*/
 setVisModeLBD2(){
 	currentMode2++;
 
@@ -201,7 +203,7 @@ setVisModeRBD(){
 
 	complete;	
 }
-
+/*------Playlist Vis Menu------*/
 setVisModeRBD2(){
 	visMenu2 = new PopUpMenu;
 	pksmenu = new PopUpMenu;
@@ -287,6 +289,7 @@ setVisModeRBD2(){
 refreshVisSettings ()
 {
 	currentMode = getPrivateInt(getSkinName(), "Visualizer Mode", 1);
+/*------Playlist Vis Mode------*/
 	currentMode2 = getPrivateInt(getSkinName(), "PLVisualizer Mode", 1);
 	show_peaks = getPrivateInt(getSkinName(), "Visualizer show Peaks", 1);
 	compatibility = getPrivateInt(getSkinName(), "DeClassified Classic Visualizer behavior", 1);
@@ -640,7 +643,7 @@ else if (a >= 400 && a <= 403)
 		setPrivateInt(getSkinName(), "Visualizer Refresh rate", v_fps);
 	}
 }
-
+/*------Same as above but changes the Playlist vis instead------*/
 ProcessMenuResult2 (int a)
 {
 	if (a < 1) return;
@@ -839,7 +842,7 @@ setVis (int mode)
 	}
 	currentMode = mode;
 }
-
+/*------Sets the Playlist Vis------*/
 setVis2 (int mode2)
 {
 	setPrivateInt(getSkinName(), "PLVisualizer Mode", mode2);
