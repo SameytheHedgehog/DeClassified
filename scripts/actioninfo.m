@@ -3,8 +3,8 @@
 //EQ change messages. Also hooks into the Main Window
 //and Equalizer for obvious reasons.
 
-#include "../../../lib/std.mi"
-#include "..\..\..\lib/winampconfig.mi"
+#include "compiler/lib/std.mi"
+#include "compiler/lib/winampconfig.mi"
 
 Global Group frameGroup, frameGroupEQ, frameGroupEQShade, MainWindow;
 Global Togglebutton ShuffleBtn, RepeatBtn, CLBA;
@@ -143,7 +143,9 @@ RepeatBtn.onToggle(boolean on) {
 	int v = getCurCfgVal();
 	SongTicker.hide();
 	InfoTicker.show();
-    if (on) InfoTicker.setText("Repeat: ON"); else InfoTicker.setText("Repeat: OFF");
+	if (v == 0) InfoTicker.setText("Repeat: Off");
+	else if (v > 0) InfoTicker.setText("Repeat: Playlist");
+	else if (v < 0) InfoTicker.setText("Repeat: Track");
 }
 
 ShuffleBtn.onToggle(boolean on) {

@@ -879,8 +879,8 @@ LegacyOptions(int legacy){
 			PLVisualizer.setXmlParam("visible", "1");
 		}
 		if(WinampMainWindow.getScale() != 2){
-		MainVisualizer.setXmlParam("y", "2");
-		PLVisualizer.setXmlParam("y", "2");
+		MainVisualizer.setXmlParam("y", "1");
+		PLVisualizer.setXmlParam("y", "1");
 		}else{
 		MainVisualizer.setXmlParam("y", "0");
 		PLVisualizer.setXmlParam("y", "0");
@@ -898,13 +898,9 @@ LegacyOptions(int legacy){
 WinampMainWindow.onScale(Double newscalevalue){
 	LegacyOptions(compatibility);
 	if(legacy == 1){
-		if(newscalevalue != 2){
-			MainVisualizer.setXmlParam("y", "2");
-			PLVisualizer.setXmlParam("y", "2");
-		}else{
-			MainVisualizer.setXmlParam("y", "0");
-			PLVisualizer.setXmlParam("y", "0");
-		}
+		MainVisualizer.setXmlParam("y", "1");
+		PLVisualizer.setXmlParam("y", "1");
+
 	}else{
 		MainVisualizer.setXmlParam("y", "0");
 		PLVisualizer.setXmlParam("y", "0");

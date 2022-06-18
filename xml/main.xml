@@ -75,10 +75,19 @@
 
 <script file="scripts/setposbarvisibility.maki"/>
 
-	<togglebutton id="Repeat" x="210" y="89" image="rep"
-		downImage="repp" activeImage="repa"
-		cfgattrib="{45F3F7C1-A6F3-4EE6-A15E-125E92FC3F8D};Repeat" cfgvals="0;1;-1"
-		cursor="cur.normal" tooltip="Toggle Playlist Repeating"/>
+	<NStatesButton
+		id="Repeat"
+		x="210" y="89"
+		nstates="3"
+		image="rep"
+		hoverimage="rep"
+		downImage="repp"
+		activeImage="repa"
+		cfgattrib="{45F3F7C1-A6F3-4EE6-A15E-125E92FC3F8D};Repeat"
+		cfgvals="0;1;-1"
+		rectrgn="1"
+		cursor="cur.normal"
+		tooltip="Toggle Playlist Repeating"/>
 	
 	<togglebutton id="Shuffle" x="182" y="89" image="shuf"
 		downImage="shufp" activeImage="shufa"
