@@ -56,6 +56,7 @@
 	<bitmap id="shuf" file="skin/shufrep.png" x="46" y="0" h="15" w="29"/>
 	<bitmap id="shufp" file="skin/shufrep.png" x="46" y="15" h="15" w="29"/>
 	<bitmap id="shufa" file="skin/shufrep.png" x="46" y="30" h="15" w="29"/>
+	<bitmap id="shufpa" file="skin/shufrep.png" x="46" y="45" h="15" w="29"/>
 
 	<!-- NStates Button images Start -->
 	<bitmap id="rep0" file="skin/shufrep.png" x="0" y="0" w="28" h="15"/>
@@ -72,11 +73,14 @@
 	<!-- NStates Button images End-->
 
 	<bitmap id="player.toggler.eq.disabled" file="skin/shufrep.png" x="0" y="61" h="12" w="23"/>
-	<bitmap id="player.toggler.eq.pressed" file="skin/shufrep.png" x="46" y="73" h="12" w="23"/>
+	<bitmap id="player.toggler.eq.pressed" file="skin/shufrep.png" x="46" y="61" h="12" w="23"/>
 	<bitmap id="player.toggler.eq.enabled" file="skin/shufrep.png" x="0" y="73" h="12" w="23"/>
+	<bitmap id="player.toggler.eq.pressed.enabled" file="skin/shufrep.png" x="46" y="73" h="12" w="23"/>
+
 	<bitmap id="player.toggler.pl.disabled" file="skin/shufrep.png" x="23" y="61" h="12" w="23"/>
-	<bitmap id="player.toggler.pl.pressed" file="skin/shufrep.png" x="69" y="73" h="12" w="23"/>
+	<bitmap id="player.toggler.pl.pressed" file="skin/shufrep.png" x="69" y="61" h="12" w="23"/>
 	<bitmap id="player.toggler.pl.enabled" file="skin/shufrep.png" x="23" y="73" h="12" w="23"/>
+	<bitmap id="player.toggler.pl.pressed.enabled" file="skin/shufrep.png" x="69" y="73" h="12" w="23"/>
 
 	<bitmap id="player.status.mono.active" file="skin/monoster.png" x="29" y="0" h="12" w="27"/>
 	<bitmap id="player.status.mono.inactive" file="skin/monoster.png" x="29" y="12" h="12" w="27"/>
