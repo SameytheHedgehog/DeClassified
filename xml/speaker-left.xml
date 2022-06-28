@@ -1,0 +1,48 @@
+<include file="speaker-elements.xml" />
+<container id="left-speaker" name="Speakers">
+	<groupdef id="Speaker-Left">
+		<layer
+			id="L_SpeakerBG"
+			x="0" y="0"
+			image="speaker.bg"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="34" y="32"
+			id="L_Tweeter"
+			image="speaker.tweeter"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="40"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="24" y="74"
+			id="L_Midrange"
+			image="speaker.midrange"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="60"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="14" y="136"
+			id="L_Woofer"
+			image="speaker.woofer"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="80"
+			ghost="1"
+			cursor="cur.normal"/>
+		<layer
+			id="L_Grille"
+			x="0" y="0"
+			image="speaker.grille"
+			ghost="1"
+			visible="1"
+			cursor="cur.normal"/>
+		<script file="scripts\speakers.maki"/>
+	</groupdef>
+	<layout id="normal" background="speaker.bg" default_h="232" default_w="108" w="108" h="232">
+		<group id="Speaker-Left" x="0" y="0" w="108" h="232"/>
+	</layout>
+</container> 
