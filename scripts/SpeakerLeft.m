@@ -1,39 +1,37 @@
 #include "compiler/lib/std.mi"
 #include "compiler/lib/config.mi"
 
-Function UpdateLeft(Int Var);
 Function refreshSPKRSettings();
 Function setSPKRModeRBD();
 Function ProcessMenuResult (int a);
 
-Global Group frameGroup;
+Global Group L_frameGroup;
 
 Global PopUpMenu speakermenu;
 
-Global Timer refreshEQ;
-Global layer speakerLeft, L_SpeakerTrigger, R_SpeakerTrigger, L_GrilleLayer, R_GrilleLayer;
-Global AnimatedLayer L_Tweeter_Vis, L_Midrange_Vis, L_Woofer_Vis;
-Global Int L_TweetVisBand, L_MidRVisband, L_WoofVisband;
-Global Int level1T, level1M, level1W, level2, LastFrame1;
+Global timer SpkrVU;
+Global layer speakerLeft, L_SpeakerTrigger, L_GrilleLayer;
+Global AnimatedLayer L_Tweeter_VU, L_Midrange_VU, L_Woofer_VU;
+Global Int L_TweetVUBand, L_MidRVUband, L_WoofVUband;
+Global Int level1T, level1M, level1W;
 
 Global Boolean speaker_grille;
 
 System.onScriptLoaded() {
-	frameGroup = getScriptGroup();
+	L_frameGroup = getScriptGroup();
 
-	L_GrilleLayer = frameGroup.findObject("L_Grille");
-//	R_GrilleLayer = frameGroup.findObject("R_Grille");
+	L_GrilleLayer = L_frameGroup.findObject("L_Grille");
 
-	L_Tweeter_Vis = frameGroup.getObject("L_Tweeter");
-	L_Midrange_Vis = frameGroup.getObject("L_Midrange");
-	L_Woofer_Vis = frameGroup.getObject("L_Woofer");
-//	R_Speaker_Vis = frameGroup.findObject("R_Speaker");
+	L_Tweeter_VU = L_frameGroup.getObject("L_Tweeter");
+	L_Midrange_VU = L_frameGroup.getObject("L_Midrange");
+	L_Woofer_VU = L_frameGroup.getObject("L_Woofer");
 
-	L_SpeakerTrigger = frameGroup.getObject("L_SpeakerBG");
-//	R_SpeakerTrigger = frameGroup.getObject("R_SpeakerBG");
+	L_SpeakerTrigger = L_frameGroup.getObject("L_SpeakerBG");
 
-	refreshEQ = new Timer;
-	refreshEQ.setDelay(10);
+
+	SpkrVU = new Timer;
+	SpkrVU.setDelay(10);
+	SpkrVU.start();
 
 	refreshSPKRSettings();
 }
@@ -44,31 +42,27 @@ refreshSPKRSettings()
 	speaker_grille = getPrivateInt(getSkinName(), "Speaker Grille", 1);
 	if (speaker_grille == 0) L_GrilleLayer.setXmlParam("visible","0");
 	else L_GrilleLayer.setXmlParam("visible","1");
-	refreshEQ.start();
 }
 
 //	========	stops and deletes the timer when the script unloads	========
 System.onscriptunloading() {
-	refreshEQ.stop();
-	delete refreshEQ;
+	SpkrVU.stop();
 }
 
 //	========	Changes the Speakers to the beat	========
-refreshEQ.onTimer() {
+SpkrVU.onTimer() {
 
-	L_TweetVisBand = (getVisBand(0, 50)+getVisBand(0, 58)+getVisBand(0, 67)+getVisBand(0, 75)/4);
-	L_MidRVisband = (getVisBand(0, 25)+getVisBand(0, 33)+getVisBand(0, 42)+getVisBand(0, 49)/4);
-	L_WoofVisband = (getVisBand(0, 0)+getVisBand(0, 8)+getVisBand(0, 17)+getVisBand(0, 24)/4);
+	L_TweetVUBand = (getVisBand(0, 50)+getVisBand(0, 56)+getVisBand(0, 62)+getVisBand(0, 68)+getVisBand(0, 75)/5);
+	L_MidRVUband = (getVisBand(0, 25)+getVisBand(0, 31)+getVisBand(0, 37)+getVisBand(0, 43)+getVisBand(0, 49)/5);
+	L_WoofVUband = (getVisBand(0, 0)+getVisBand(0, 6)+getVisBand(0, 12)+getVisBand(0, 18)+getVisBand(0, 24)/5);
 
-    level1T = (L_TweetVisBand*L_Tweeter_Vis.getLength()/256);
-    level1M = (L_MidRVisband*L_Midrange_Vis.getLength()/256);
-    level1W = (L_WoofVisband*L_Woofer_Vis.getLength()/256);
-//    level2 = (getRightVuMeter()*speakerRight.getLength()/256);
+	level1T = (L_TweetVUBand*(L_Tweeter_VU.getLength())/256);
+	level1M = (L_MidRVUband*(L_Midrange_VU.getLength())/256);
+	level1W = (L_WoofVUband*(L_Woofer_VU.getLength())/256);
 
-    L_Tweeter_Vis.gotoFrame(level1T);
-    L_Midrange_Vis.gotoFrame(level1M);
-    L_Woofer_Vis.gotoFrame(level1W);
-//    speakerRight.gotoFrame(level2);
+	L_Tweeter_VU.gotoFrame(level1T);
+	L_Midrange_VU.gotoFrame(level1M);
+	L_Woofer_VU.gotoFrame(level1W);
 }
 
 
@@ -112,7 +106,6 @@ ProcessMenuResult (int a)
 	else if (a == 102)
 	{
 		System.getContainer("left-speaker").hide();
-/*		System.getContainer("loudspeaker.right").hide();*/
 	}
 }
 

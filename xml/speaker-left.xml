@@ -40,7 +40,7 @@
 			ghost="1"
 			visible="1"
 			cursor="cur.normal"/>
-		<script file="scripts\speakers.maki"/>
+		<script file="scripts/leftSpeaker.maki"/>
 	</groupdef>
 	<layout id="normal" background="speaker.bg" default_h="232" default_w="108" w="108" h="232">
 		<group id="Speaker-Left" x="0" y="0" w="108" h="232"/>
