@@ -1,5 +1,4 @@
 #include "compiler/lib/std.mi"
-#include "compiler/lib/config.mi"
 
 Function refreshSPKRSettings();
 Function setSPKRModeRBD();
@@ -70,6 +69,7 @@ SpkrVU.onTimer() {
 setSPKRModeRBD(){
 	speakermenu = new PopUpMenu;
 	speakermenu.addCommand("Show Grille", 101, speaker_grille == 1, 0);
+	speakermenu.addCommand("Mini Mode (WIP, just removes Grille atm)", 101, speaker_grille == 1, 0);
 	speakermenu.addSeparator();
 	speakermenu.addCommand("Close Speakers", 102, 0, 0);
 
