@@ -1,0 +1,53 @@
+#ifndef included
+#error This script can only be compiled as a #include
+#endif
+
+
+/*
+**********************************
+ClassicPro Widget API.
+**********************************
+designed for ClassicPro v1.03
+**********************************
+by Skin Consortium
+**********************************
+*/
+
+Function initWidget();							//Always call this in onScriptLoaded() first line
+Function gotoBrowserUrl(String url);			//Opens the browser tab and then the url
+Function gotoSuiTab(int tabNo);					//Switch to this Tab
+Function gotoSuiMini(int miniNo);				//Switch to this Mini view
+Function toggleDrawer(boolean onOff);			//Close or open the drawer
+Function setFrameMain(int pos);					//Resize the main Wasabi:Frame
+Function setFrameMini(int pos);					//Resize the mini Wasabi:Frame
+Function toggleSideView(boolean onOff);			//Close or open the Side view
+
+
+/*
+Code part...
+*/
+Global GuiObject cpro_sui;
+initWidget(){
+	cpro_sui = getContainer("main").getLayout("normal").findObject("cpro.sui");
+}
+gotoBrowserUrl(String url){
+	cpro_sui.sendAction ("browser_url", url, 0, 0, 0, 0);
+}
+gotoSuiTab(int tabno){
+	cpro_sui.sendAction ("switch_to_tab", "", tabNo, 0, 0, 0);
+}
+gotoSuiMini(int miniNo){
+	cpro_sui.sendAction ("switch_to_mini", "", miniNo, 0, 0, 0);
+}
+toggleDrawer(boolean onOff){
+	cpro_sui.sendAction ("drawer_onoff", "", onOff, 0, 0, 0);
+}
+setFrameMain(int pos){
+	cpro_sui.sendAction ("frame_main_setsize", "", pos, 0, 0, 0);
+}
+setFrameMini(int pos){
+	cpro_sui.sendAction ("frame_mini_setsize", "", pos, 0, 0, 0);
+}
+toggleSideView(boolean onOff){
+	cpro_sui.sendAction ("sideview_onoff", "", onOff, 0, 0, 0);
+}

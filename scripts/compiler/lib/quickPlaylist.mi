@@ -1,0 +1,69 @@
+#ifndef included
+#error This script can only be compiled as a #include
+#endif
+
+
+/*
+**********************************
+QuickPlaylist v1.02
+**********************************
+by pjn123
+**********************************
+*/
+
+Function popQuickPlaylist(int length, boolean controls);
+Global String tempString, menutext;
+Global ConfigAttribute shuffleAtt, repeatAtt;
+Global boolean init;
+
+popQuickPlaylist(int length, boolean controls){
+	if(length<10)length=10;
+
+	Popupmenu menuList = new PopupMenu;
+
+	if(controls){
+		if(!init){
+			shuffleAtt = Config.getItemByGuid("{45F3F7C1-A6F3-4EE6-A15E-125E92FC3F8D}").getAttribute("Shuffle");
+			repeatAtt = Config.getItemByGuid("{45F3F7C1-A6F3-4EE6-A15E-125E92FC3F8D}").getAttribute("Repeat");
+			init=true;
+		}
+		menuList.addCommand("Repeat", -2, stringToInteger(repeatAtt.getData()), 0);
+		menuList.addCommand("Shuffle", -3, stringToInteger(shuffleAtt.getData()), 0);
+		menuList.addSeparator();
+	}
+	
+	int startpos;
+	menutext = "";
+	
+	if(PlEdit.getNumTracks()-PlEdit.getCurrentIndex() < length/2) startpos=PlEdit.getNumTracks()-length;
+	else startpos=PlEdit.getCurrentIndex()-length/2;
+	
+	if(startpos<0) startpos=0;
+	
+	for(int i = startpos; i<startpos+length; i++){
+		if(i==PlEdit.getNumTracks()) break;
+		menutext=integerToString(i+1)+". "+ strleft(PlEdit.getTitle(i),70);
+		if(strlen(PlEdit.getTitle(i))>70) menutext+="...";
+		
+		if(PlEdit.getLength(i)!="") tempString="\t["+PlEdit.getLength(i)+"]";
+		else tempString="";
+	
+		menutext+=tempString;
+		menuList.addCommand(menutext, i, (PlEdit.getCurrentIndex()==i), (PlEdit.getCurrentIndex()==i));
+	}
+	
+	int result = menuList.popAtMouse();
+
+	if(result>=0){
+		PlEdit.playTrack(result);
+	}
+	else if(result==-2){
+		repeatAtt.setData(integerToString(!stringToInteger(repeatAtt.getData())));
+	}
+	else if(result==-3){
+		shuffleAtt.setData(integerToString(!stringToInteger(shuffleAtt.getData())));
+	}
+
+	delete menuList;
+	complete;
+}

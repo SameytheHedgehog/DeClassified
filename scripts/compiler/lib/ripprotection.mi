@@ -1,0 +1,16 @@
+//----------------------------------------------------------------------------------------------------------------
+// ripprotection.mi
+//
+// Ripprotection for MAKI files
+//----------------------------------------------------------------------------------------------------------------
+
+
+Function ripProtection(string orgskinname);
+
+ripProtection(string orgskinname) {
+	String skinname = strlower(getSkinName());
+	if(strsearch(skinname, orgskinname) == -1) {
+		messageBox(FILENAME+ " doesn't run in it's original UserInterface (Skin)!\nIf you have renamed the skinfile, please restore the old name!\nOtherwise you have tried to  R I P  " + FILENAME + "\nThe UserInterface will be locked!\nInfos about using my scripts: martin.deimos@gmx.de", "Rip Protection", 1, "");
+		LockUI();
+	} else UnlockUI();
+}
