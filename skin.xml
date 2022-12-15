@@ -57,8 +57,8 @@
 	<include file="xml/minibrowser.xml"/> 
 
 	<!-- Speakers -->
-	<include file="xml/speaker-left.xml"/>
-	<script file="scripts/SpeakerLeft.maki"/>
+	<include file="xml/speakers.xml"/>
+	<script file="scripts/Speakers.maki"/>
 
 	<!-- About the skin -->
 	<include file="about/about.xml"/> 

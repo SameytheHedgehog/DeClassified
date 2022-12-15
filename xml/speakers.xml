@@ -1,0 +1,181 @@
+<include file="speaker-elements.xml" />
+<container id="left-speaker" name="Speakers">
+	<groupdef id="Speaker-Left">
+		<layer
+			id="L_SpeakerBG"
+			x="0" y="0"
+			image="speaker.bg"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="34" y="32"
+			id="L_Tweeter"
+			image="speaker.tweeter"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="40"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="24" y="74"
+			id="L_Midrange"
+			image="speaker.midrange"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="60"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="14" y="136"
+			id="L_Woofer"
+			image="speaker.woofer"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="80"
+			ghost="1"
+			cursor="cur.normal"/>
+		<layer
+			id="L_Grille"
+			x="0" y="0"
+			image="speaker.grille"
+			ghost="1"
+			visible="1"
+			cursor="cur.normal"/>
+	</groupdef>
+	<layout id="normal" background="speaker.bg" default_h="232" default_w="108" w="108" h="232">
+		<group id="Speaker-Left" x="0" y="0" w="108" h="232"/>
+	</layout>
+	<groupdef id="MiniSpeaker-Left">
+		<layer
+			id="L_MiniSpeakerBG"
+			x="0" y="0"
+			image="mini.speaker.bg"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="17" y="16"
+			id="L_MiniTweeter"
+			image="mini.speaker.tweeter"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="20"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="12" y="37"
+			id="L_MiniMidrange"
+			image="mini.speaker.midrange"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="30"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="7" y="68"
+			id="L_MiniWoofer"
+			image="mini.speaker.woofer"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="40"
+			ghost="1"
+			cursor="cur.normal"/>
+		<layer
+			id="L_MiniGrille"
+			x="0" y="0"
+			image="mini.speaker.grille"
+			ghost="1"
+			visible="1"
+			cursor="cur.normal"/>
+	</groupdef>
+	<layout id="minimised" background="mini.speaker.bg" default_h="116" default_w="54" w="54" h="116">
+		<group id="MiniSpeaker-Left" x="0" y="0" w="54" h="116"/>
+	</layout>
+</container>
+<container id="right-speaker" name="Speakers">
+	<groupdef id="Speaker-Right">
+		<layer
+			id="R_SpeakerBG"
+			x="0" y="0"
+			image="speaker.bg"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="34" y="32"
+			id="R_Tweeter"
+			image="speaker.tweeter"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="40"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="24" y="74"
+			id="R_Midrange"
+			image="speaker.midrange"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="60"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="14" y="136"
+			id="R_Woofer"
+			image="speaker.woofer"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="80"
+			ghost="1"
+			cursor="cur.normal"/>
+		<layer
+			id="R_Grille"
+			x="0" y="0"
+			image="speaker.grille"
+			ghost="1"
+			visible="1"
+			cursor="cur.normal"/>
+	</groupdef>
+	<layout id="normal" background="speaker.bg" default_h="232" default_w="108" w="108" h="232">
+		<group id="Speaker-Right" x="0" y="0" w="108" h="232"/>
+	</layout>
+	<groupdef id="MiniSpeaker-Right">
+		<layer
+			id="R_MiniSpeakerBG"
+			x="0" y="0"
+			image="mini.speaker.bg"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="17" y="16"
+			id="R_MiniTweeter"
+			image="mini.speaker.tweeter"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="20"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="12" y="37"
+			id="R_MiniMidrange"
+			image="mini.speaker.midrange"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="30"
+			ghost="1"
+			cursor="cur.normal"/>
+		<animatedlayer
+			x="7" y="68"
+			id="R_MiniWoofer"
+			image="mini.speaker.woofer"
+			autoplay="0"
+			autoreplay="0"
+			framewidth="40"
+			ghost="1"
+			cursor="cur.normal"/>
+		<layer
+			id="R_MiniGrille"
+			x="0" y="0"
+			image="mini.speaker.grille"
+			ghost="1"
+			visible="1"
+			cursor="cur.normal"/>
+	</groupdef>
+	<layout id="minimised" background="mini.speaker.bg" default_h="116" default_w="54" w="54" h="116">
+		<group id="MiniSpeaker-Right" x="0" y="0" w="54" h="116"/>
+	</layout>
+</container> 
