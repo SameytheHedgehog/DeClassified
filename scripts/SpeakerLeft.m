@@ -4,6 +4,7 @@ Function refreshSPKRSettings();
 Function setSPKRModeRBD();
 Function ProcessMenuResult (int a);
 
+Global Container L_SpeakerContainer;
 Global Group L_frameGroup, L_frameGroupMini, NormalGroup, MiniGroup;
 
 Global PopUpMenu speakermenu;
@@ -14,12 +15,12 @@ Global AnimatedLayer L_Tweeter_VU, L_Midrange_VU, L_Woofer_VU, L_MinTweeter_VU, 
 Global Int L_TweetVUBand, L_MidRVUband, L_WoofVUband;
 Global Float level1T, level1M, level1W;
 
-Global Boolean speaker_grille;
+Global Boolean speaker_grille, speaker_mini;
 
 System.onScriptLoaded() {
-//	L_frameGroup = getScriptGroup();
-    L_frameGroup = getContainer("left-speaker").getLayout("normal");
-	L_frameGroupMini = getContainer("left-speaker").getLayout("minimised");
+	L_SpeakerContainer = getContainer("left-speaker");
+    L_frameGroup = L_SpeakerContainer.getLayout("normal");
+	L_frameGroupMini = L_SpeakerContainer.getLayout("minimised");
 
 // === Normal Mode ===
 	NormalGroup = L_frameGroup.findObject("Speaker-Left");
@@ -55,6 +56,10 @@ refreshSPKRSettings()
 	speaker_grille = getPrivateInt(getSkinName(), "Speaker Grille", 1);
 	if (speaker_grille == 0) L_GrilleLayer.setXmlParam("visible","0");
 	else L_GrilleLayer.setXmlParam("visible","1");
+
+	speaker_mini = getPrivateInt(getSkinName(), "Speaker Grille", 1);
+	if (speaker_mini == 0) L_SpeakerContainer.switchToLayout("normal");
+	else L_SpeakerContainer.switchToLayout("minimised");
 }
 
 //	========	stops and deletes the timer when the script unloads	========
@@ -73,9 +78,13 @@ SpkrVU.onTimer() {
 	level1M = (L_MidRVUband*(L_Midrange_VU.getLength())/256);
 	level1W = (L_WoofVUband*(L_Woofer_VU.getLength())/256);
 
-    L_Tweeter_VU.gotoFrame(level1T);
-    L_Midrange_VU.gotoFrame(level1M);
-    L_Woofer_VU.gotoFrame(level1W);
+	L_Tweeter_VU.gotoFrame(level1T);
+	L_Midrange_VU.gotoFrame(level1M);
+	L_Woofer_VU.gotoFrame(level1W);
+
+	L_MinTweeter_VU.gotoFrame(level1T);
+	L_MinMidrange_VU.gotoFrame(level1M);
+	L_MinWoofer_VU.gotoFrame(level1W);
 }
 
 
@@ -83,7 +92,7 @@ SpkrVU.onTimer() {
 setSPKRModeRBD(){
 	speakermenu = new PopUpMenu;
 	speakermenu.addCommand("Show Grille", 101, speaker_grille == 1, 0);
-	speakermenu.addCommand("Mini Mode w.i.p.", 102, 0, 0);
+	speakermenu.addCommand("Mini Mode", 102, speaker_mini == 1, 0);
 	speakermenu.addSeparator();
 	speakermenu.addCommand("Close Speakers", 103, 0, 0);
 
@@ -111,14 +120,28 @@ ProcessMenuResult (int a)
 		if (speaker_grille == 0)
 		{
 			L_GrilleLayer.setXmlParam("visible","0");
+			L_MinGrilleLayer.setXmlParam("visible","0");
 		}
 		else
 		{
 			L_GrilleLayer.setXmlParam("visible","1");
+			L_MinGrilleLayer.setXmlParam("visible","1");
 		}
 	}
 	else if (a == 102)
 	{
+		speaker_mini = (speaker_mini - 1) * (-1);
+		setPrivateInt(getSkinName(), "Speaker Mini", speaker_mini);
+
+		if (speaker_mini == 0)
+		{
+
+			L_SpeakerContainer.switchToLayout("normal");
+		}
+		else
+		{
+			L_SpeakerContainer.switchToLayout("minimised");
+		}
 	}
 	else if (a == 103)
 	{
@@ -131,6 +154,9 @@ L_SpeakerTrigger.onRightButtonUp (int x, int y)
 {
 	setSPKRModeRBD();
 }
-
+L_MinSpeakerTrigger.onRightButtonUp (int x, int y)
+{
+	setSPKRModeRBD();
+}
 
 
