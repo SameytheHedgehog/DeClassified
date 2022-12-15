@@ -24,6 +24,12 @@
 <!-- Speaker Grille -->
 	<bitmap id="mini.speaker.grille" file="skin/speakers1.png" x="162" y="0" h="116" w="54"/>
 
+<!-- Tweeter -->
+	<bitmap id="mini.speaker.tweeter" file="skin/speakers2TweeterMini.png" x="0" y="0" h="20" w="100"/>
+	
+<!-- Midrange -->
+	<bitmap id="mini.speaker.midrange" file="skin/speakers2MidrangeMini.png" x="0" y="0" h="30" w="150"/>
+	
 <!-- Woofer -->
-	<bitmap id="mini.speaker.woofer" file="skin/speakers2Woofer.png" x="0" y="0" h="80" w="400"/>
+	<bitmap id="mini.speaker.woofer" file="skin/speakers2WooferMini.png" x="0" y="0" h="40" w="200"/>
 </elements>	

@@ -4,28 +4,42 @@ Function refreshSPKRSettings();
 Function setSPKRModeRBD();
 Function ProcessMenuResult (int a);
 
-Global Group L_frameGroup;
+Global Group L_frameGroup, L_frameGroupMini, NormalGroup, MiniGroup;
 
 Global PopUpMenu speakermenu;
 
 Global timer SpkrVU;
-Global layer speakerLeft, L_SpeakerTrigger, L_GrilleLayer;
-Global AnimatedLayer L_Tweeter_VU, L_Midrange_VU, L_Woofer_VU;
+Global layer L_SpeakerTrigger, L_GrilleLayer, L_MinSpeakerTrigger, L_MinGrilleLayer;
+Global AnimatedLayer L_Tweeter_VU, L_Midrange_VU, L_Woofer_VU, L_MinTweeter_VU, L_MinMidrange_VU, L_MinWoofer_VU;
 Global Int L_TweetVUBand, L_MidRVUband, L_WoofVUband;
-Global Int level1T, level1M, level1W;
+Global Float level1T, level1M, level1W;
 
 Global Boolean speaker_grille;
 
 System.onScriptLoaded() {
-	L_frameGroup = getScriptGroup();
+//	L_frameGroup = getScriptGroup();
+    L_frameGroup = getContainer("left-speaker").getLayout("normal");
+	L_frameGroupMini = getContainer("left-speaker").getLayout("minimised");
 
-	L_GrilleLayer = L_frameGroup.findObject("L_Grille");
+// === Normal Mode ===
+	NormalGroup = L_frameGroup.findObject("Speaker-Left");
+	L_GrilleLayer = NormalGroup.findObject("L_Grille");
 
-	L_Tweeter_VU = L_frameGroup.getObject("L_Tweeter");
-	L_Midrange_VU = L_frameGroup.getObject("L_Midrange");
-	L_Woofer_VU = L_frameGroup.getObject("L_Woofer");
+	L_Tweeter_VU = NormalGroup.getObject("L_Tweeter");
+	L_Midrange_VU = NormalGroup.getObject("L_Midrange");
+	L_Woofer_VU = NormalGroup.getObject("L_Woofer");
 
-	L_SpeakerTrigger = L_frameGroup.getObject("L_SpeakerBG");
+	L_SpeakerTrigger = NormalGroup.getObject("L_SpeakerBG");
+
+// === Mini Mode ===
+	MiniGroup = L_frameGroupMini.findObject("MiniSpeaker-Left");
+	L_MinGrilleLayer = MiniGroup.findObject("L_MiniGrille");
+
+	L_MinTweeter_VU = MiniGroup.getObject("L_MiniTweeter");
+	L_MinMidrange_VU = MiniGroup.getObject("L_MiniMidrange");
+	L_MinWoofer_VU = MiniGroup.getObject("L_MiniWoofer");
+
+	L_MinSpeakerTrigger = MiniGroup.getObject("L_MiniSpeakerBG");
 
 
 	SpkrVU = new Timer;
@@ -59,9 +73,9 @@ SpkrVU.onTimer() {
 	level1M = (L_MidRVUband*(L_Midrange_VU.getLength())/256);
 	level1W = (L_WoofVUband*(L_Woofer_VU.getLength())/256);
 
-	L_Tweeter_VU.gotoFrame(level1T);
-	L_Midrange_VU.gotoFrame(level1M);
-	L_Woofer_VU.gotoFrame(level1W);
+    L_Tweeter_VU.gotoFrame(level1T);
+    L_Midrange_VU.gotoFrame(level1M);
+    L_Woofer_VU.gotoFrame(level1W);
 }
 
 
@@ -69,9 +83,9 @@ SpkrVU.onTimer() {
 setSPKRModeRBD(){
 	speakermenu = new PopUpMenu;
 	speakermenu.addCommand("Show Grille", 101, speaker_grille == 1, 0);
-	speakermenu.addCommand("Mini Mode (WIP, just removes Grille atm)", 101, speaker_grille == 1, 0);
+	speakermenu.addCommand("Mini Mode w.i.p.", 102, 0, 0);
 	speakermenu.addSeparator();
-	speakermenu.addCommand("Close Speakers", 102, 0, 0);
+	speakermenu.addCommand("Close Speakers", 103, 0, 0);
 
 	ProcessMenuResult (speakermenu.popAtMouse());
 
@@ -104,6 +118,9 @@ ProcessMenuResult (int a)
 		}
 	}
 	else if (a == 102)
+	{
+	}
+	else if (a == 103)
 	{
 		System.getContainer("left-speaker").hide();
 	}

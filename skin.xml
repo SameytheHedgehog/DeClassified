@@ -58,6 +58,7 @@
 
 	<!-- Speakers -->
 	<include file="xml/speaker-left.xml"/>
+	<script file="scripts/SpeakerLeft.maki"/>
 
 	<!-- About the skin -->
 	<include file="about/about.xml"/> 
