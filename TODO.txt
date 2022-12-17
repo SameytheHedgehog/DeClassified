@@ -1,4 +1,2 @@
-1. Get Speakers Finished
-2. Try to remember what I wanted to replace the Doublesize button with
-3. Get Refugee up to date with the current release of DeClassified
-4. Create a real font based on the bitmap font the skin uses.
+1. Try to remember what I wanted to replace the Doublesize button with
+2. Create a real font based on the bitmap font the skin uses.

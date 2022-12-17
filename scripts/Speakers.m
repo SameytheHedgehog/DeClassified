@@ -1,3 +1,19 @@
+/*---------------------------------------------------
+-----------------------------------------------------
+Filename:	speakers.m
+Version:	1.0
+
+Type:		maki
+Date:		12-15-2022
+Author:		Samey the Hedgehog
+
+Note:		Simple speaker script that has a tweeter,
+			midrange, and woofer speaker all animated
+			seperately. Feel free to use however you
+			like. :)
+-----------------------------------------------------
+---------------------------------------------------*/
+
 #include "compiler/lib/std.mi"
 
 Function refreshSPKRSettings();
@@ -19,7 +35,7 @@ Global AnimatedLayer R_Tweeter_VU, R_Midrange_VU, R_Woofer_VU, R_MinTweeter_VU, 
 Global Int TweetVUBand, MidRVUband, WoofVUband;
 Global Int level1T, level1M, level1W;
 
-Global Boolean speaker_grille, speaker_mini, speaker_closed;
+Global Boolean speaker_grille, speaker_mini, speaker_closed, onoff;
 
 System.onScriptLoaded() {
 	L_SpeakerContainer = getContainer("left-speaker");
@@ -109,6 +125,7 @@ refreshSPKRSettings()
 	{
 	System.getContainer("left-speaker").hide();
 	System.getContainer("right-speaker").hide();
+	SpkrVU.stop();
 	}
 }
 
@@ -236,6 +253,7 @@ ProcessMenuResult (int a)
 		{
 			System.getContainer("left-speaker").hide();
 			System.getContainer("right-speaker").hide();
+			SpkrVU.stop();
 		}
 	}
 }
@@ -262,12 +280,15 @@ R_MinSpeakerTrigger.onRightButtonUp (int x, int y)
 //	========	Make sure the Right Speaker opens too	========
 L_frameGroup.onSetVisible(boolean onoff)
 {
-System.getContainer("right-speaker").show();
-speaker_closed = 0;
-}
-
-L_frameGroupMini.onSetVisible(boolean onoff)
-{
-System.getContainer("right-speaker").show();
-speaker_closed = 0;
+SpkrVU.start();
+	if (speaker_mini == 0)
+	{
+	System.getContainer("right-speaker").show();
+	speaker_closed = 0;
+	}
+	else
+	{
+	System.getContainer("right-speaker").show();
+	speaker_closed = 0;
+	}
 }

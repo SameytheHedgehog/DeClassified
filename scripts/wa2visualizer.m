@@ -24,10 +24,10 @@ Function setVis (int mode);
 Function setVis2 (int mode2);
 Function ProcessMenuResult (int a);
 Function setVisModeLBD();
-Function setVisModeLBD2();
 Function setVisModeRBD();
 Function setWA265Mode(int wa_mode);
 Function setFont(int font);
+Function ShowHideVis();
 
 Global GuiObject PlayIndicator, Songticker, Infoticker;
 
@@ -52,7 +52,7 @@ Global PopUpMenu fpsmenu;
 Global PopUpMenu vumenu;
 Global PopUpMenu firemenu;
 
-Global Int currentMode, currentMode2, a_falloffspeed, p_falloffspeed, osc_render, ana_render, a_coloring, v_fps, smoothvu;
+Global Int currentMode, currentMode2, a_falloffspeed, p_falloffspeed, osc_render, ana_render, a_coloring, v_fps, smoothvu, PlaylistRBD;
 Global Boolean show_peaks, isShade, playLED, WA265MODE, SKINNEDFONT;
 Global layer MainTrigger, MainShadeTrigger, PLTrigger;
 
@@ -190,27 +190,25 @@ System.onStop(){
 	peak1 = 0;
 	peak2 = 0;
 	StopStuff();
+	ShowHideVis();
 }
 
 System.onPause(){
-	if(currentMode == 1){
-		VU.stop();
-	}
+	VU.stop();
 	PauseStuff();
+	ShowHideVis();
 }
 
 System.onResume(){
-	if(currentMode == 1){
-		VU.start();
-	}
+	VU.start();
 	ResumeStuff();
+	ShowHideVis();
 }
 
 System.onPlay(){
-	if(currentMode == 1){
-		VU.start();
-	}
+	VU.start();
 	PlayStuff();
+	ShowHideVis();
 }
 
 System.onTitleChange(String newtitle){
@@ -218,29 +216,30 @@ System.onTitleChange(String newtitle){
 }
 
 setVisModeLBD(){
-	currentMode++;
-
-	if (currentMode == 3)
+	if (PlaylistRBD == 0)
 	{
-		currentMode = 0;
-	}
+		currentMode++;
 
-	setVis (currentMode);
-	setWA265Mode(WA265MODE);
-	complete;
-}
+		if (currentMode == 3)
+		{
+			currentMode = 0;
+		}
 
-/*------Change Playlist Vis on left-click------*/
-setVisModeLBD2(){
-	currentMode2++;
-
-	if (currentMode2 == 3)
+		setVis (currentMode);
+		setWA265Mode(WA265MODE);
+		complete;
+	}else
 	{
-		currentMode2 = 0;
-	}
+		currentMode2++;
 
-	setVis2 (currentMode2);
-	complete;
+		if (currentMode2 == 3)
+		{
+			currentMode2 = 0;
+		}
+
+		setVis2 (currentMode2);
+		complete;
+	}
 }
 
 setVisModeRBD(){
@@ -256,14 +255,22 @@ setVisModeRBD(){
 
 	visMenu.addCommand("Visualization mode:", 999, 0, 1);
 	visMenu.addSeparator();
-	visMenu.addCommand("Off", 100, currentMode == 0, 0);
-	if(WA265MODE == 1){
-		visMenu.addCommand("Spectrum analyzer / Winshade VU", 1, currentMode == 1, 0);
-	}else{
-		visMenu.addCommand("Spectrum analyzer", 1, currentMode == 1, 0);
-	}
-	visMenu.addCommand("Oscilliscope", 2, currentMode == 2, 0);
 
+	if(PlaylistRBD == 0)
+	{
+		visMenu.addCommand("Off", 100, currentMode == 0, 0);
+		if(WA265MODE == 1){
+			visMenu.addCommand("Spectrum analyzer / Winshade VU", 1, currentMode == 1, 0);
+		}else{
+			visMenu.addCommand("Spectrum analyzer", 1, currentMode == 1, 0);
+		}
+		visMenu.addCommand("Oscilliscope", 2, currentMode == 2, 0);
+	}else
+	{
+		visMenu.addCommand("Off", 102, currentMode2 == 0, 0);
+		visMenu.addCommand("Spectrum analyzer", 4, currentMode2 == 1, 0);
+		visMenu.addCommand("Oscilliscope", 5, currentMode2 == 2, 0);
+	}
 
 	visMenu.addSeparator();
 	visMenu.addCommand("DeClassified Settings", 998, 0, 1);
@@ -322,6 +329,7 @@ setVisModeRBD(){
 		vumenu.addCommand("Smooth VU", 902, smoothvu == 2, 0);
 	}
 
+	visMenu.addSeparator();
 	visMenu.addcommand(translate("Start/Stop plug-in")+"\tCtrl+Shift+K", 404, 0,0);
 	visMenu.addcommand(translate("Configure plug-in...")+"\tAlt+K", 405, 0,0);
 	visMenu.addcommand(translate("Select plug-in...")+"\tCtrl+K", 406, 0,0);
@@ -341,7 +349,7 @@ setVisModeRBD(){
 	delete vumenu;
 	delete firemenu;
 
-	complete;	
+	complete;
 }
 
 refreshVisSettings ()
@@ -511,46 +519,61 @@ refreshVisSettings ()
 	setWA265Mode(WA265MODE);
 	setFont(SKINNEDFONT);
 	initPlayLED();
+	ShowHideVis();
 }
 
 MainTrigger.onLeftButtonDown (int x, int y)
 {
+	PlaylistRBD = 0;
 	setVisModeLBD();
 }
 
 MainShadeTrigger.onLeftButtonDown (int x, int y)
 {
+	PlaylistRBD = 0;
 	setVisModeLBD();
 }
 
 PLTrigger.onLeftButtonDown (int x, int y)
 {
-	setVisModeLBD2();
+	PlaylistRBD = 1;
+	setVisModeLBD();
 }
 
 MainTrigger.onRightButtonUp (int x, int y)
 {
+	PlaylistRBD = 0;
 	setVisModeRBD();
 }
 
 MainShadeTrigger.onRightButtonUp (int x, int y)
 {
+	PlaylistRBD = 0;
 	setVisModeRBD();
 }
 
 PLTrigger.onRightButtonUp (int x, int y)
 {
+	PlaylistRBD = 1;
 	setVisModeRBD();
 }
 
 ProcessMenuResult (int a)
 {
+	
+	PlaylistRBD = 0;
 	if (a < 1) return;
 
-	if (a > 0 && a <= 6 || a == 100)
+	if (a > 0 && a < 3 || a == 100)
 	{
 		if (a == 100) a = 0;
 		setVis(a);
+	}
+
+	if (a > 2 && a < 6 || a == 102)
+	{
+		if (a == 102) a = 3;
+		setVis2(a - 3);
 	}
 
 	else if (a == 101)
@@ -809,4 +832,21 @@ setVis2 (int mode2)
 		VU.stop();
 	}
 	currentMode2 = mode2;
+}
+
+ShowHideVis(){
+	WinampMainWindow.onSetVisible(WinampMainWindow.isVisible());
+	if(getStatus() == -1){
+		MainVisualizer.setXmlParam("visible", "1");
+		MainShadeVisualizer.setXmlParam("visible", "1");
+		PLVisualizer.setXmlParam("visible", "1");
+	}else if(getStatus() == 0){
+		MainVisualizer.setXmlParam("visible", "0");
+		MainShadeVisualizer.setXmlParam("visible", "0");
+		PLVisualizer.setXmlParam("visible", "0");
+	}else if(getStatus() == 1){
+		MainVisualizer.setXmlParam("visible", "1");
+		MainShadeVisualizer.setXmlParam("visible", "1");
+		PLVisualizer.setXmlParam("visible", "1");
+	}
 }

@@ -201,22 +201,10 @@ setState(){
 
 //surely there's ways to improve how this is handled
 setState2(){
-    if(!WA5MODE){
-        if(getPosition() < getPlayItemLength()-1093){ //1093 was eyeballed
-            playstatus.setXmlParam("image", "wa.play.green");
-            setState();
-        }else if(getPlayItemLength() <= 0){
-            playstatus.setXmlParam("image", "wa.play.green");
-            setState();
-        }else{
-            playstatus.setXmlParam("image", "wa.play.red"); //only ever occurs if the above conditions passed
-        }
+    if(getPlayItemLength() <= 0 && bitrateint == 0 || bitrateint == -1 && freqint == 0 || freqint == -1){
+        playstatus.setXmlParam("image", "wa.play.red"); //has to appear first, i think i'm getting the logic wrong...
     }else{
-        if(getPlayItemLength() <= 0 && bitrateint == 0 || bitrateint == -1 && freqint == 0 || freqint == -1){
-            playstatus.setXmlParam("image", "wa.play.red"); //has to appear first, i think i'm getting the logic wrong...
-        }else{
-            playstatus.setXmlParam("image", "wa.play.green");
-            setState();
-        }
+        playstatus.setXmlParam("image", "wa.play.green");
+        setState();
     }
 }
