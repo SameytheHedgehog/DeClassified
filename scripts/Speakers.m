@@ -136,33 +136,36 @@ System.onscriptunloading() {
 
 //	========	Changes the Speakers to the beat	========
 SpkrVU.onTimer() {
-//	==== Left ====
 	TweetVUBand = (getVisBand(0, 50)+getVisBand(0, 56)+getVisBand(0, 62)+getVisBand(0, 68)+getVisBand(0, 75)/5);
 	MidRVUband = (getVisBand(0, 25)+getVisBand(0, 31)+getVisBand(0, 37)+getVisBand(0, 43)+getVisBand(0, 49)/5);
 	WoofVUband = (getVisBand(0, 0)+getVisBand(0, 6)+getVisBand(0, 12)+getVisBand(0, 18)+getVisBand(0, 24)/5);
 
-//	==== Left ====
 	level1T = (TweetVUBand*(L_Tweeter_VU.getLength())/256);
 	level1M = (MidRVUband*(L_Midrange_VU.getLength())/256);
 	level1W = (WoofVUband*(L_Woofer_VU.getLength())/256);
 
+	if (speaker_mini == 0)
+	{
 //	==== Left ====
 	L_Tweeter_VU.gotoFrame(level1T);
 	L_Midrange_VU.gotoFrame(level1M);
 	L_Woofer_VU.gotoFrame(level1W);
 
-	L_MinTweeter_VU.gotoFrame(level1T);
-	L_MinMidrange_VU.gotoFrame(level1M);
-	L_MinWoofer_VU.gotoFrame(level1W);
-
 //	==== Right ====
 	R_Tweeter_VU.gotoFrame(level1T);
 	R_Midrange_VU.gotoFrame(level1M);
 	R_Woofer_VU.gotoFrame(level1W);
+	}
+	else
+	{
+	L_MinTweeter_VU.gotoFrame(level1T);
+	L_MinMidrange_VU.gotoFrame(level1M);
+	L_MinWoofer_VU.gotoFrame(level1W);
 
 	R_MinTweeter_VU.gotoFrame(level1T);
 	R_MinMidrange_VU.gotoFrame(level1M);
 	R_MinWoofer_VU.gotoFrame(level1W);
+	}
 }
 
 

@@ -1,2 +1,2 @@
-1. Try to remember what I wanted to replace the Doublesize button with
+1. Replace Double-Size button with Mute Button
 2. Create a real font based on the bitmap font the skin uses.
