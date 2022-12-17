@@ -5,6 +5,7 @@
 
 #include "compiler/lib/std.mi"
 #include "compiler/lib/winampconfig.mi"
+#include "IsWACUP.m"
 
 Global Group frameGroup, frameGroupEQ, frameGroupEQShade, MainWindow;
 Global Togglebutton ShuffleBtn, RepeatBtn, CLBA;
@@ -28,6 +29,7 @@ Function setScaling(Boolean dbsizemode);
 
 System.onScriptLoaded(){
 
+	initDetector();
     WinampConfigGroup eqwcg = WinampConfig.getGroup("{72409F84-BAF1-4448-8211-D84A30A1591A}");
 	int freqmode = eqwcg.getInt("frequencies"); // returns 0 for classical winamp levels, 1 for ISO levels
 
@@ -212,14 +214,14 @@ CLBA.onToggle(boolean on) {
 	SongTickerTimer.start();
 	SongTicker.hide();
 	InfoTicker.show();
-	if (on) InfoTicker.setText("Enable Always-on-Top"); else InfoTicker.setText("Disable Always-on-Top");
+	if (on) InfoTicker.setText("Enable Always-On-Top"); else InfoTicker.setText("Disable Always-On-Top");
 }
 
 CLBI.onLeftButtonDown(int x, int y) {
 	SongTickerTimer.start();
 	SongTicker.hide();
 	InfoTicker.show();
-	InfoTicker.setText("File info box");
+	InfoTicker.setText("File Info Box");
 }
 
 /*CLBD.onToggle(boolean on) {
@@ -242,11 +244,11 @@ CLBD.onLeftButtonDown(int x, int y){
 	SongTicker.hide();
 	InfoTicker.show();
 	if(dbsize == 0){
-		InfoTicker.setText("Enable doublesize mode");
+		InfoTicker.setText("Enable Doublesize Mode");
 		dbsize = 1;
 		CLBD.setXmlParam("image", "CLBDp");
 	}else{
-		InfoTicker.setText("Disable doublesize mode"); //no idea why this works but it works
+		InfoTicker.setText("Disable Doublesize Mode"); //no idea why this works but it works
 		dbsize = 0;
 		CLBD.setXmlParam("image", "CLBD");
 	}
@@ -261,8 +263,13 @@ setScaling(int dbsizemode){
     if (dbsizemode){
 		Normal.setScale(2);
 		NormalEQ.setScale(2);
-		NormalPL.setScale(2);
-		ShadePL.setScale(2);
+		if(IsWACUP){
+			NormalPL.setScale(2);
+			ShadePL.setScale(2);
+		}else{
+			NormalPL.setScale(1);
+			ShadePL.setScale(1);
+		}
 		shadeeq.setScale(2);
 		CLBD.setXmlParam("image", "CLBDp");
 	}else{

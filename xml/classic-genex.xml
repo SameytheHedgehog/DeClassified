@@ -23,6 +23,7 @@
 	<color id="x86" value="26,34,55"/>		<!-- listview/treeview selectionbar back color -->
 	<color id="x88" value="24,148,227"/>	<!-- listview/treeview selection bar textcolor (inactive) -->
 	<color id="x90" value="26,34,55"/>		<!-- listview/treeview selectionbar back color (inactive) -->
+    <color id="textbmp" value="36,153,255"/>   <!-- use the text color from text.bmp, unless you want to use a custom color -->
 
 <!-- Generic Button -->
 
@@ -56,10 +57,10 @@
     <bitmap id="wasabi.button.pressed.bottom" file="skin/genex.png" x="70" y="163" h="4" w="25" gammagroup="greybuttons"/>
     <bitmap id="wasabi.button.pressed.bottom.right" file="skin/genex.png" x="95" y="163" h="4" w="4" gammagroup="greybuttons"/-->
 
-    <bitmap id="wasabi.button.label.arrow.up"		file="skin/wasabi/window-elements.png" x="137" y="75" h="4" w="7"/>
-    <bitmap id="wasabi.button.label.arrow.down"		file="skin/wasabi/window-elements.png" x="137" y="86" h="4" w="7"/>
-    <bitmap id="wasabi.button.label.arrow.left"		file="skin/wasabi/window-elements.png" x="133" y="79" h="7" w="4"/>
-    <bitmap id="wasabi.button.label.arrow.right"	file="skin/wasabi/window-elements.png" x="144" y="79" h="7" w="4"/>
+    <bitmap id="wasabi.button.label.arrow.up" file="xml\wasabi.classic\wasabi/window-elements.png" x="137" y="75" h="4" w="7"/>
+    <bitmap id="wasabi.button.label.arrow.down" file="xml\wasabi.classic\wasabi/window-elements.png" x="137" y="86" h="4" w="7"/>
+    <bitmap id="wasabi.button.label.arrow.left" file="xml\wasabi.classic\wasabi/window-elements.png" x="133" y="79" h="7" w="4"/>
+    <bitmap id="wasabi.button.label.arrow.right" file="xml\wasabi.classic\wasabi/window-elements.png" x="144" y="79" h="7" w="4"/>
 
     <bitmap id="studio.button.upperLeft"            file="skin/genex.png" x="0" y="0" h="3" w="3"/>
     <bitmap id="studio.button.top"                  file="skin/genex.png" x="3" y="0" h="3" w="41"/>

@@ -47,14 +47,14 @@
 		x="111" y="27"
 		w="154" h="9"
 		font="wasabi.font.default" altfont="arial" fontsize="13"
-		altvalign="center" dblclickaction="trackinfo" 
-		rightclickaction="trackmenu" cursor="cur.horizslider"
+		altvalign="center" dblclickaction="trackinfo" color="textbmp"
+		rightclickaction="trackmenu" cursor="cur.horizslider" antialias="0"
 		tooltip="Song Title (right-click for options)"
 	/>
 
 	<text id="infoticker" x="110" y="27" offsetx="-1" offsety="-1"
 		w="155" h="9" font="wasabi.font.default" fontsize="13" dblclickaction="trackinfo" 
-		rightclickaction="trackmenu" ghost="1" color="x50"/>
+		rightclickaction="trackmenu" ghost="1" color="textbmp" antialias="0"/>
 
 	<!--text
 		id="debugticker"
@@ -97,7 +97,7 @@
 	<status id="wastatus" x="26" y="28" stopBitmap="wa.stop" playBitmap="wa.play" pauseBitmap="wa.pause" ghost="1" cursor="cur.normal"/>
 	<layer id="playbackstatus" x="24" y="28" image="wa.play.green" ghost="1"/>
 
-	<script file="scripts/classicplaystatus.maki"/>
+	<!--script file="scripts/classicplaystatus.maki"/-->
 
 	<!--text id="mixrate" display="songsamplerate" x="154" y="43" w="12" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal" color="x50"/>	
 	<text id="bitrate" display="songbitrate" x="109" y="43" w="17" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal" color="x50"//-->	
@@ -165,12 +165,13 @@
     ColorBand15="10,75,164"
 	ColorBand16="10,104,232"
 	colorbandpeak="150,150,150"
+
     colorosc1="10,104,232"
     colorosc2="109,127,187"
     colorosc3="150,150,150"
     colorosc4="109,122,165"
     colorosc5="10,75,164"/>
-	<layer id="main.vis.trigger" w="75" h="16" cursor="cur.normal"/>
+	<layer id="main.vis.trigger" w="76" h="16" cursor="cur.normal"/>
 </groupdef>
 
 <groupdef id="shademain">
@@ -213,6 +214,8 @@
     colorosc3="150,150,150"
     colorosc4="109,122,165"
     colorosc5="10,75,164"/>
+	<animatedlayer id="wa.shade.vu.left"  x="79" y="5" h="2" w="38" image="wa2.player.shade.normal.vu" frameheight="2"/>
+	<animatedlayer id="wa.shade.vu.right" x="79" y="8" h="2" w="38" image="wa2.player.shade.normal.vu" frameheight="2"/>
 	<layer id="main.vis.trigger" x="79" y="5" w="38" h="5" cursor="cur.normal"/>
 
     <button id="winshade" inactivealpha="0" action="SWITCH" param="normal" x="254" y="3" image="wa2.player.title.shademode" downImage="wa2.player.title.shademode.pressed" cursor="cur.normal" tooltip="Toggle Windowshade Mode"/>
