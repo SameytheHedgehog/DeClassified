@@ -283,15 +283,25 @@ R_MinSpeakerTrigger.onRightButtonUp (int x, int y)
 //	========	Make sure the Right Speaker opens too	========
 L_frameGroup.onSetVisible(boolean onoff)
 {
-SpkrVU.start();
-	if (speaker_mini == 0)
+	if (onoff)
 	{
-	System.getContainer("right-speaker").show();
-	speaker_closed = 0;
+	SpkrVU.start();
+		if (speaker_mini == 0)
+		{
+		System.getContainer("right-speaker").show();
+		speaker_closed = 0;
+		}
+		else
+		{
+		System.getContainer("right-speaker").show();
+		speaker_closed = 0;
+		}
 	}
 	else
 	{
-	System.getContainer("right-speaker").show();
-	speaker_closed = 0;
+	System.getContainer("right-speaker").hide();
+	speaker_closed = 1;
+	SpkrVU.stop();
+
 	}
 }
