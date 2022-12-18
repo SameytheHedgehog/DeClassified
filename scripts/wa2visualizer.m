@@ -253,7 +253,7 @@ setVisModeRBD(){
 	vumenu = new PopUpMenu;
 	firemenu = new PopUpmenu;
 
-	visMenu.addCommand("Visualization mode:", 999, 0, 1);
+	visMenu.addCommand("Visualisation mode:", 999, 0, 1);
 	visMenu.addSeparator();
 
 	if(PlaylistRBD == 0)
@@ -329,6 +329,8 @@ setVisModeRBD(){
 		vumenu.addCommand("Smooth VU", 902, smoothvu == 2, 0);
 	}
 
+	visMenu.addSeparator();
+	visMenu.addCommand("Visualiser Plugin Options", 997, 0, 1);
 	visMenu.addSeparator();
 	visMenu.addcommand(translate("Start/Stop plug-in")+"\tCtrl+Shift+K", 404, 0,0);
 	visMenu.addcommand(translate("Configure plug-in...")+"\tAlt+K", 405, 0,0);

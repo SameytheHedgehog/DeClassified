@@ -287,14 +287,14 @@ CLBV.onLeftButtonDown(int x, int y){
 	SongTickerTimer.start();
 	SongTicker.hide();
 	InfoTicker.show();
-	InfoTicker.setText("Visualization Menu");
+	InfoTicker.setText("Visualisation Menu");
 }
 
 CLBV.onLeftButtonUp(int x, int y)
 {
 	popupmenu CLBVmenu = new popupmenu;
 
-	CLBVmenu.addcommand(translate("Visualization options...")+"\tAlt+O", 4, 0,0);
+	CLBVmenu.addcommand(translate("Visualisation options...")+"\tAlt+O", 4, 0,0);
 	CLBVmenu.addSeparator();
 	CLBVmenu.addcommand(translate("Start/Stop plug-in")+"\tCtrl+Shift+K", 1, 0,0);
 	CLBVmenu.addcommand(translate("Configure plug-in...")+"\tAlt+K", 2, 0,0);
