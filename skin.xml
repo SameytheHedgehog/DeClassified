@@ -22,8 +22,8 @@
 	<include file="xml/wasabi.classic/titlebox/titlebox.xml"/>
 	<include file="xml/wasabi.classic/statusbar/statusbar.xml"/>
 	<include file="xml/wasabi.classic/tooltips/tooltips.xml"/>
-	<include file="xml/wasabi.classic/components.xml"/>
 	<include file="xml/wasabi.classic/browser/browser.xml"/> 
+	<include file="xml/wasabi.classic/components.xml"/>
 
 	<!-- the very building blocks to get our 4 main windows rendered -->
 	<include file="xml/classic-elements.xml"/>
@@ -34,6 +34,9 @@
 	<include file="xml/pledit.xml"/>
 	<include file="xml/video.xml"/>
 	<include file="xml/medialibrary.xml"/>
+
+	<!-- Minibrowser window -->
+	<include file="xml/minibrowser.xml"/> 
 
 	<!-- detect wacup -->
 	<!-- uncomment if you're not providing wacup specific assets -->
@@ -51,10 +54,7 @@
 	<script file="scripts/NoWinamp58.maki"/>
 
 	<!-- Modern Skin Album Art window -->
-	<include file="xml/albumart.xml"/> 
-
-	<!-- Minibrowser window -->
-	<include file="xml/minibrowser.xml"/> 
+	<include file="xml/albumart.xml"/>
 
 	<!-- Speakers -->
 	<include file="xml/speakers.xml"/>
