@@ -19,7 +19,7 @@
         <button id="0db" x="45" y="65" w="20" h="7" rectrgn="1" cursor="cur.normal"/>
         <button id="-12db" x="44" y="95" w="22" h="7" rectrgn="1" cursor="cur.normal"/>
 
-        <eqvis x="88" y="17" w="109" h="19" colortop="0,61,123" colormiddle="0,83,165" colorbottom="0,113,226" colorpreamp="3,54,108"/>
+        <eqvis x="88" y="17" w="109" h="19" colortop="0,61,123" colormiddle="0,83,165" colorbottom="0,113,226" colorpreamp="3,54,108" cursor="cur.normal"/>
 			<layer id="preamp_layer" x="21" y="38" image="eq.slider0" cursor="cur.vertislider" tooltip="Preamp"/>
 			<layer id="eq1back" x="78" y="38" image="eq.slider0" cursor="cur.vertislider" tooltip=""/>
 			<layer id="eq2back" x="96" y="38" image="eq.slider0" cursor="cur.vertislider" tooltip=""/>
@@ -58,7 +58,7 @@
 
     <groupdef id="shadeeq">
     
-        <layer id="blah" dblClickAction="SWITCH;eq" x="0" y="0" h="14" w="275" image="eq.shade.on" inactiveimage="eq.shade.off" move="1" cursor="cur.move" />
+        <layer id="blah" dblClickAction="SWITCH;eq" x="0" y="0" h="14" w="275" image="eq.shade.on" inactiveimage="eq.shade.off" move="1" cursor="cur.move"/>
 
         <button id="winshade" inactivealpha="0" action="SWITCH" param="normal" x="254" y="3" image="eqshade.shade" downImage="eqshade.shadep" cursor="cur.minimise" tooltip="Toggle Windowshade Mode"/>
         <button id="Close" inactivealpha="0" action="close" x="264" y="3" image="eqshade.close" downImage="eqshade.closep" cursor="cur.close" tooltip="Close"/>
