@@ -129,6 +129,12 @@
 	<bitmap id="wa2.player.shade.normal.vu" file="skin/265vu/normalvu.png"/>
 	<bitmap id="wa2.player.shade.smooth.vu" file="skin/265vu/smoothvu.png"/>
 
+	<bitmap id="wa2.player.shade.normal.vu_fire" file="skin/265vu/normalvu_fire.png"/>
+	<bitmap id="wa2.player.shade.smooth.vu_fire" file="skin/265vu/smoothvu_fire.png"/>
+
+	<bitmap id="wa2.player.shade.normal.vu_line" file="skin/265vu/normalvu_line.png"/>
+	<bitmap id="wa2.player.shade.smooth.vu_line" file="skin/265vu/smoothvu_line.png"/>
+
 	<bitmap id="clutterbar" file="skin/titlebar.png" x="304" y="0" w="8" h="43"/>
 
 	<bitmap id="CLBO" file="skin/titlebar.png" x="305" y="2" w="7" h="8"/>

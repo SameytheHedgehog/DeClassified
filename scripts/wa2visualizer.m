@@ -25,14 +25,13 @@ Function setVis2 (int mode2);
 Function ProcessMenuResult (int a);
 Function setVisModeLBD();
 Function setVisModeRBD();
-Function setWA265Mode();
 Function setFont(int font);
 Function ShowHideVis();
 
 Global GuiObject PlayIndicator, Songticker, Infoticker;
 
 Global Group MainWindow, MainClassicVis, Clutterbar;
-Global Group PLWindow, MainShadeWindow, PLVis, PLVUVis;
+Global Group PLWindow, MainShadeWindow, PLVis, MainVUVIS, PLVUVis;
 
 Global Vis MainVisualizer, MainShadeVisualizer, PLVisualizer;
 Global AnimatedLayer MainShadeVULeft, MainShadeVURight, MainVULeft, MainVURight, MainVUPeakLeft, MainVUPeakRight;
@@ -54,7 +53,7 @@ Global PopUpMenu vumenu2;
 Global PopUpMenu vusettings;
 Global PopUpMenu firemenu;
 
-Global Int currentMode, currentMode2, a_falloffspeed, p_falloffspeed, osc_render, ana_render, a_coloring, v_fps, smoothvu, PlaylistRBD;
+Global Int currentMode, currentMode2, a_falloffspeed, p_falloffspeed, osc_render, ana_render, a_coloring, v_fps, smoothvu, PlaylistRBD, vu_coloring;
 Global Boolean show_peaks, show_vupeaks, vu_gravity, isShade, playLED, WA265SPEED, SKINNEDFONT;
 Global layer MainTrigger, MainShadeTrigger, PLTrigger;
 
@@ -84,10 +83,11 @@ System.onScriptLoaded()
 	MainShadeVULeft = MainShadeWindow.findObject("wa.shade.vu.left");
 	MainShadeVURight = MainShadeWindow.findObject("wa.shade.vu.right");
 	MainShadeTrigger = MainShadeWindow.findObject("main.vis.trigger");
-		MainVULeft = MainClassicVis.findObject("wacup.vu.l");
-		MainVURight = MainClassicVis.findObject("wacup.vu.r");
-		MainVUPeakLeft = MainClassicVis.findObject("wacup.vu.l.peak");
-		MainVUPeakRight = MainClassicVis.findObject("wacup.vu.r.peak");
+		MainVUVIS = MainClassicVis.findObject("WACUPVU");
+		MainVULeft = MainVUVIS.findObject("wacup.vu.l");
+		MainVURight = MainVUVIS.findObject("wacup.vu.r");
+		MainVUPeakLeft = MainVUVIS.findObject("wacup.vu.l.peak");
+		MainVUPeakRight = MainVUVIS.findObject("wacup.vu.r.peak");
 
 	PLWindow = getContainer("PL").getLayout("normal");
 	PLVis = PLWindow.findObject("waclassicplvis");
@@ -154,19 +154,6 @@ setFont(int font){
 		Infoticker.setXmlParam("y", "24");
 		Infoticker.setXmlParam("offsety", "-2");
 		Infoticker.setXmlParam("h", "14");
-	}
-}
-
-setWA265Mode(){
-
-if(currentMode == 3){
-		MainShadeVisualizer.setXmlParam("alpha", "0");
-		MainShadeVULeft.setXmlParam("alpha", "255");
-		MainShadeVURight.setXmlParam("alpha", "255");
-	}else{
-		MainShadeVisualizer.setXmlParam("alpha", "255");
-		MainShadeVULeft.setXmlParam("alpha", "0");
-		MainShadeVURight.setXmlParam("alpha", "0");
 	}
 }
 
@@ -319,7 +306,6 @@ setVisModeLBD(){
 		}
 
 		setVis (currentMode);
-		setWA265Mode();
 		complete;
 	}else
 	{
@@ -422,6 +408,12 @@ setVisModeRBD(){
 		vusettings.addCommand("Smooth VU Peak falloff", 109, vu_gravity == 1, 0);
 		vusettings.addCommand("Winamp 2.65 Speed", 108, WA265SPEED == 1, 0);
 		vusettings.addSeparator();
+	vusettings.addCommand("VU Bar Color Styles", 996, 0, 1);
+		vusettings.addSeparator();
+			vusettings.addCommand("Normal style", 410, vu_coloring == 0, 0);
+			vusettings.addCommand("Fire style", 412, vu_coloring == 2, 0);
+			vusettings.addCommand("Line style", 413, vu_coloring == 3, 0);
+		vusettings.addSeparator();
 		vusettings.addSubmenu(vumenu2, "Peak falloff Speed");
 		vumenu2.addCommand("Slower", 500, vp_falloffspeed == 0, 0);
 		vumenu2.addCommand("Slow", 501, vp_falloffspeed == 1, 0);
@@ -438,7 +430,6 @@ setVisModeRBD(){
 
 	ProcessMenuResult (visMenu.popAtMouse());
 
-	setWA265Mode(); 
 	PlayIndicator.setXmlParam("visible", integerToString(playLED));
 
 	delete visMenu;
@@ -465,6 +456,7 @@ refreshVisSettings()
 	osc_render = getPrivateInt(getSkinName(), "Oscilloscope Settings", 2);
 	ana_render = getPrivateInt(getSkinName(), "Spectrum Analyzer Settings", 2);
 	a_coloring = getPrivateInt(getSkinName(), "Visualizer analyzer coloring", 0);
+	vu_coloring = getPrivateInt(getSkinName(), "Visualizer Bar coloring", 0);
 	v_fps = getPrivateInt(getSkinName(), "Visualizer Refresh rate", 3);
 	playLED = getPrivateInt(getSkinName(), "DeClassified Play LED", 1);
 	WA265SPEED = getPrivateInt(getSkinName(), "DeClassified Winamp 2.65 VU Speed", 0);
@@ -523,6 +515,35 @@ refreshVisSettings()
 		MainVisualizer.setXmlParam("coloring", "Line");
 		MainShadeVisualizer.setXmlParam("coloring", "Line");
 		PLVisualizer.setXmlParam("coloring", "Line");
+	}
+
+	if (vu_coloring == 0)
+	{															// NORMAL
+		MainVULeft.setXmlParam("image", "wacup.vu");
+		MainVURight.setXmlParam("image", "wacup.vu");
+		PlaylistVULeft.setXmlParam("image", "wacup.vu.pl");
+		PlaylistVURight.setXmlParam("image", "wacup.vu.pl");
+	}
+	else if (vu_coloring == 1)
+	{															// NORMAL
+		MainVULeft.setXmlParam("image", "wacup.vu");
+		MainVURight.setXmlParam("image", "wacup.vu");
+		PlaylistVULeft.setXmlParam("image", "wacup.vu.pl");
+		PlaylistVURight.setXmlParam("image", "wacup.vu.pl");
+	}
+	else if (vu_coloring == 2)
+	{															// FIRE
+		MainVULeft.setXmlParam("image", "wacup.vu_fire");
+		MainVURight.setXmlParam("image", "wacup.vu_fire");
+		PlaylistVULeft.setXmlParam("image", "wacup.vu.pl_fire");
+		PlaylistVURight.setXmlParam("image", "wacup.vu.pl_fire");
+	}
+	else if (vu_coloring == 3)
+	{															// LINE
+		MainVULeft.setXmlParam("image", "wacup.vu_line");
+		MainVURight.setXmlParam("image", "wacup.vu_line");
+		PlaylistVULeft.setXmlParam("image", "wacup.vu.pl_line");
+		PlaylistVURight.setXmlParam("image", "wacup.vu.pl_line");
 	}
 
 	if (osc_render == 0)
@@ -604,31 +625,102 @@ refreshVisSettings()
 	setPrivateInt(getSkinName(), "Visualizer Refresh rate", v_fps);
 
 	if (smoothvu == 0)
+	{
+		if (vu_coloring == 0) //normal
 		{
 			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
 			MainShadeVULeft.setXmlParam("frameheight", "2");
 			MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
 			MainShadeVURight.setXmlParam("frameheight", "2");
 		}
-		else if (smoothvu == 1)
+		else if (vu_coloring == 1) //normal
 		{
 			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
 			MainShadeVULeft.setXmlParam("frameheight", "2");
 			MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
 			MainShadeVURight.setXmlParam("frameheight", "2");
 		}
-		else if (smoothvu == 2)
+		else if (vu_coloring == 2) //fire
+		{
+			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+			MainShadeVULeft.setXmlParam("frameheight", "2");
+			MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+			MainShadeVURight.setXmlParam("frameheight", "2");
+		}
+		else if (vu_coloring == 3) //line
+		{
+			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+			MainShadeVULeft.setXmlParam("frameheight", "2");
+			MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+			MainShadeVURight.setXmlParam("frameheight", "2");
+		}
+	}
+	else if (smoothvu == 1)
+	{
+		if (vu_coloring == 0) //normal
+		{
+			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
+			MainShadeVULeft.setXmlParam("frameheight", "2");
+			MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
+			MainShadeVURight.setXmlParam("frameheight", "2");
+		}
+		else if (vu_coloring == 1) //normal
+		{
+			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
+			MainShadeVULeft.setXmlParam("frameheight", "2");
+			MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
+			MainShadeVURight.setXmlParam("frameheight", "2");
+		}
+		else if (vu_coloring == 2) //fire
+		{
+			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+			MainShadeVULeft.setXmlParam("frameheight", "2");
+			MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+			MainShadeVURight.setXmlParam("frameheight", "2");
+		}
+		else if (vu_coloring == 3) //line
+		{
+			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+			MainShadeVULeft.setXmlParam("frameheight", "2");
+			MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+			MainShadeVURight.setXmlParam("frameheight", "2");
+		}
+	}
+	else if (smoothvu == 2)
+	{
+		if (vu_coloring == 0) //normal
 		{
 			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu");
 			MainShadeVULeft.setXmlParam("frameheight", "1");
 			MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu");
 			MainShadeVURight.setXmlParam("frameheight", "1");
 		}
+		else if (vu_coloring == 1) //normal
+		{
+			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu");
+			MainShadeVULeft.setXmlParam("frameheight", "1");
+			MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu");
+			MainShadeVURight.setXmlParam("frameheight", "1");
+		}
+		else if (vu_coloring == 2) //fire
+		{
+			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu_fire");
+			MainShadeVULeft.setXmlParam("frameheight", "1");
+			MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu_fire");
+			MainShadeVURight.setXmlParam("frameheight", "1");
+		}
+		else if (vu_coloring == 3) //line
+		{
+			MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu_line");
+			MainShadeVULeft.setXmlParam("frameheight", "1");
+			MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu_line");
+			MainShadeVURight.setXmlParam("frameheight", "1");
+		}
+	}
 	setPrivateInt(getSkinName(), "DeClassified Winamp 2.65 VU Options", smoothvu);
 
 	setVis (currentMode);
 	setVis2 (currentMode2);
-	setWA265Mode();
 	setFont(SKINNEDFONT);
 	initPlayLED();
 	ShowHideVis();
@@ -784,6 +876,80 @@ else if (a >= 400 && a <= 403)
 		setPrivateInt(getSkinName(), "Visualizer analyzer coloring", a_coloring);
 	}
 
+else if (a >= 410 && a <= 413)
+	{
+		vu_coloring = a - 410;
+		if (vu_coloring == 0)
+		{															// NORMAL
+			if (smoothvu == 2)
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu");
+			}
+			else
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
+			}
+			MainVULeft.setXmlParam("image", "wacup.vu");
+			MainVURight.setXmlParam("image", "wacup.vu");
+			PlaylistVULeft.setXmlParam("image", "wacup.vu.pl");
+			PlaylistVURight.setXmlParam("image", "wacup.vu.pl");
+		}
+		else if (vu_coloring == 1)
+		{															// NORMAL
+			if (smoothvu == 2)
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu");
+			}
+			else
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
+			}
+			MainVULeft.setXmlParam("image", "wacup.vu");
+			MainVURight.setXmlParam("image", "wacup.vu");
+			PlaylistVULeft.setXmlParam("image", "wacup.vu.pl");
+			PlaylistVURight.setXmlParam("image", "wacup.vu.pl");
+		}
+		else if (vu_coloring == 2)
+		{															// FIRE
+			if (smoothvu == 2)
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu_fire");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu_fire");
+			}
+			else
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+			}
+			MainVULeft.setXmlParam("image", "wacup.vu_fire");
+			MainVURight.setXmlParam("image", "wacup.vu_fire");
+			PlaylistVULeft.setXmlParam("image", "wacup.vu.pl_fire");
+			PlaylistVURight.setXmlParam("image", "wacup.vu.pl_fire");
+		}
+		else if (vu_coloring == 3)
+		{															// LINE
+			if (smoothvu == 2)
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu_line");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu_line");
+			}
+			else
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+			}
+			MainVULeft.setXmlParam("image", "wacup.vu_line");
+			MainVURight.setXmlParam("image", "wacup.vu_line");
+			PlaylistVULeft.setXmlParam("image", "wacup.vu.pl_line");
+			PlaylistVURight.setXmlParam("image", "wacup.vu.pl_line");
+		}
+		setPrivateInt(getSkinName(), "Visualizer Bar coloring", vu_coloring);
+	}
+
 	else if (a == 404)
 	{
 		CLBV1.Leftclick();
@@ -898,26 +1064,98 @@ else if (a >= 400 && a <= 403)
 	{
 		smoothvu = a - 900;
 		if (smoothvu == 0)
+		{
+			if (vu_coloring == 0) //normal
 			{
 				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
 				MainShadeVULeft.setXmlParam("frameheight", "2");
 				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
 				MainShadeVURight.setXmlParam("frameheight", "2");
 			}
-			else if (smoothvu == 1)
+			else if (vu_coloring == 1) //normal
 			{
 				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
 				MainShadeVULeft.setXmlParam("frameheight", "2");
 				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
 				MainShadeVURight.setXmlParam("frameheight", "2");
 			}
-			else if (smoothvu == 2)
+			else if (vu_coloring == 2) //fire
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+				MainShadeVULeft.setXmlParam("frameheight", "2");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+				MainShadeVURight.setXmlParam("frameheight", "2");
+			}
+			else if (vu_coloring == 3) //line
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+				MainShadeVULeft.setXmlParam("frameheight", "2");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+				MainShadeVURight.setXmlParam("frameheight", "2");
+			}
+		}
+		else if (smoothvu == 1)
+		{
+			if (vu_coloring == 0) //normal
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
+				MainShadeVULeft.setXmlParam("frameheight", "2");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
+				MainShadeVURight.setXmlParam("frameheight", "2");
+			}
+			else if (vu_coloring == 1) //normal
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu");
+				MainShadeVULeft.setXmlParam("frameheight", "2");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu");
+				MainShadeVURight.setXmlParam("frameheight", "2");
+			}
+			else if (vu_coloring == 2) //fire
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+				MainShadeVULeft.setXmlParam("frameheight", "2");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_fire");
+				MainShadeVURight.setXmlParam("frameheight", "2");
+			}
+			else if (vu_coloring == 3) //line
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+				MainShadeVULeft.setXmlParam("frameheight", "2");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.normal.vu_line");
+				MainShadeVURight.setXmlParam("frameheight", "2");
+			}
+		}
+		else if (smoothvu == 2)
+		{
+			if (vu_coloring == 0) //normal
 			{
 				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu");
 				MainShadeVULeft.setXmlParam("frameheight", "1");
 				MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu");
 				MainShadeVURight.setXmlParam("frameheight", "1");
 			}
+			else if (vu_coloring == 1) //normal
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu");
+				MainShadeVULeft.setXmlParam("frameheight", "1");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu");
+				MainShadeVURight.setXmlParam("frameheight", "1");
+			}
+			else if (vu_coloring == 2) //fire
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu_fire");
+				MainShadeVULeft.setXmlParam("frameheight", "1");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu_fire");
+				MainShadeVURight.setXmlParam("frameheight", "1");
+			}
+			else if (vu_coloring == 3) //line
+			{
+				MainShadeVULeft.setXmlParam("image", "wa2.player.shade.smooth.vu_line");
+				MainShadeVULeft.setXmlParam("frameheight", "1");
+				MainShadeVURight.setXmlParam("image", "wa2.player.shade.smooth.vu_line");
+				MainShadeVURight.setXmlParam("frameheight", "1");
+			}
+		}
 		setPrivateInt(getSkinName(), "DeClassified Winamp 2.65 VU Options", smoothvu);
 	}
 }
@@ -930,75 +1168,63 @@ setVis (int mode)
 		MainVisualizer.setMode(0);
 		MainShadeVisualizer.setMode(0);
 
-		PLVisualizer.setMode(0);
 		MainVULeft.setXmlParam("visible", "0");
 		MainVURight.setXmlParam("visible", "0");
-		PlaylistVULeft.setXmlParam("visible", "0");
-		PlaylistVURight.setXmlParam("visible", "0");
 		MainVUPeakLeft.setXmlParam("image", "wacup.vu.peak.blank");
 		MainVUPeakRight.setXmlParam("image", "wacup.vu.peak.blank");
-		PlaylistVUPeakLeft.setXmlParam("image", "wacup.vu.peak.pl.blank");
-		PlaylistVUPeakRight.setXmlParam("image", "wacup.vu.peak.pl.blank");
 
-		setWA265Mode();
+		MainShadeVisualizer.setXmlParam("alpha", "255");
+		MainShadeVULeft.setXmlParam("alpha", "0");
+		MainShadeVURight.setXmlParam("alpha", "0");
+
 		ShowHideVis();
-		VU.stop();
 	}
 	else if (mode == 1)
 	{
 		MainVisualizer.setMode(1);
 		MainShadeVisualizer.setMode(1);
-		PLVisualizer.setMode(1);
 
 		MainVULeft.setXmlParam("visible", "0");
 		MainVURight.setXmlParam("visible", "0");
-		PlaylistVULeft.setXmlParam("visible", "0");
-		PlaylistVURight.setXmlParam("visible", "0");
 		MainVUPeakLeft.setXmlParam("image", "wacup.vu.peak.blank");
 		MainVUPeakRight.setXmlParam("image", "wacup.vu.peak.blank");
-		PlaylistVUPeakLeft.setXmlParam("image", "wacup.vu.peak.pl.blank");
-		PlaylistVUPeakRight.setXmlParam("image", "wacup.vu.peak.pl.blank");
 
-		setWA265Mode();
+		MainShadeVisualizer.setXmlParam("alpha", "255");
+		MainShadeVULeft.setXmlParam("alpha", "0");
+		MainShadeVURight.setXmlParam("alpha", "0");
+
 		ShowHideVis();
-		VU.start();
 	}
 	else if (mode == 2)
 	{
 		MainVisualizer.setMode(2);
 		MainShadeVisualizer.setMode(2);
-		PLVisualizer.setMode(2);
 
 		MainVULeft.setXmlParam("visible", "0");
 		MainVURight.setXmlParam("visible", "0");
-		PlaylistVULeft.setXmlParam("visible", "0");
-		PlaylistVURight.setXmlParam("visible", "0");
 		MainVUPeakLeft.setXmlParam("image", "wacup.vu.peak.blank");
 		MainVUPeakRight.setXmlParam("image", "wacup.vu.peak.blank");
-		PlaylistVUPeakLeft.setXmlParam("image", "wacup.vu.peak.pl.blank");
-		PlaylistVUPeakRight.setXmlParam("image", "wacup.vu.peak.pl.blank");
 
-		setWA265Mode();
+		MainShadeVisualizer.setXmlParam("alpha", "255");
+		MainShadeVULeft.setXmlParam("alpha", "0");
+		MainShadeVURight.setXmlParam("alpha", "0");
+
 		ShowHideVis();
-		VU.stop();
 	}
 	else if(mode == 3){
 		MainVisualizer.setMode(0);
 		MainShadeVisualizer.setMode(0);
-		PLVisualizer.setMode(0);
 
 		MainVULeft.setXmlParam("visible", "1");
 		MainVURight.setXmlParam("visible", "1");
-		PlaylistVULeft.setXmlParam("visible", "1");
-		PlaylistVURight.setXmlParam("visible", "1");
 		MainVUPeakLeft.setXmlParam("image", "wacup.vu.peak");
 		MainVUPeakRight.setXmlParam("image", "wacup.vu.peak");
-		PlaylistVUPeakLeft.setXmlParam("image", "wacup.vu.peak.pl");
-		PlaylistVUPeakRight.setXmlParam("image", "wacup.vu.peak.pl");
-		
-		setWA265Mode();
+
+		MainShadeVisualizer.setXmlParam("alpha", "0");
+		MainShadeVULeft.setXmlParam("alpha", "255");
+		MainShadeVURight.setXmlParam("alpha", "255");
+
 		ShowHideVis();
-		VU.start();
 	}
 	currentMode = mode;
 }
@@ -1010,17 +1236,34 @@ setVis2 (int mode2)
 	if (mode2 == 0)
 	{
 		PLVisualizer.setMode(0);
-		VU.stop();
+		PlaylistVULeft.setXmlParam("visible", "0");
+		PlaylistVURight.setXmlParam("visible", "0");
+		PlaylistVUPeakLeft.setXmlParam("image", "wacup.vu.peak.pl.blank");
+		PlaylistVUPeakRight.setXmlParam("image", "wacup.vu.peak.pl.blank");
 	}
 	else if (mode2 == 1)
 	{
 		PLVisualizer.setMode(1);
-		VU.start();
+		PlaylistVULeft.setXmlParam("visible", "0");
+		PlaylistVURight.setXmlParam("visible", "0");
+		PlaylistVUPeakLeft.setXmlParam("image", "wacup.vu.peak.pl.blank");
+		PlaylistVUPeakRight.setXmlParam("image", "wacup.vu.peak.pl.blank");
 	}
 	else if (mode2 == 2)
 	{
 		PLVisualizer.setMode(2);
-		VU.stop();
+		PlaylistVULeft.setXmlParam("visible", "0");
+		PlaylistVURight.setXmlParam("visible", "0");
+		PlaylistVUPeakLeft.setXmlParam("image", "wacup.vu.peak.pl.blank");
+		PlaylistVUPeakRight.setXmlParam("image", "wacup.vu.peak.pl.blank");
+	}
+	else if (mode2 == 3)
+	{
+		PLVisualizer.setMode(0);
+		PlaylistVULeft.setXmlParam("visible", "1");
+		PlaylistVURight.setXmlParam("visible", "1");
+		PlaylistVUPeakLeft.setXmlParam("image", "wacup.vu.peak.pl");
+		PlaylistVUPeakRight.setXmlParam("image", "wacup.vu.peak.pl");
 	}
 	currentMode2 = mode2;
 }
@@ -1028,20 +1271,29 @@ setVis2 (int mode2)
 ShowHideVis(){
 	WinampMainWindow.onSetVisible(WinampMainWindow.isVisible());
 	MainShadeWindow.onSetVisible(MainShadeWindow.isVisible());
-	if(getStatus() == -1){
-		MainVisualizer.setXmlParam("visible", "1");
-		MainShadeVisualizer.setXmlParam("visible", "1");
-		PLVisualizer.setXmlParam("visible", "1");
-		PLVUVis.hide();
-	}else if(getStatus() == 0){
-		MainVisualizer.setXmlParam("visible", "0");
-		MainShadeVisualizer.setXmlParam("visible", "0");
-		PLVisualizer.setXmlParam("visible", "0");
-		PLVUVis.hide();
-	}else if(getStatus() == 1){
+	if(getStatus() == -1){											// PAUSED
 		MainVisualizer.setXmlParam("visible", "1");
 		MainShadeVisualizer.setXmlParam("visible", "1");
 		PLVisualizer.setXmlParam("visible", "1");
 		PLVUVis.show();
+		PLVis.show();
+		MainVUVIS.show();
+		VU.stop();
+	}else if(getStatus() == 0){										// STOPPED
+		MainVisualizer.setXmlParam("visible", "0");
+		MainShadeVisualizer.setXmlParam("visible", "0");
+		PLVisualizer.setXmlParam("visible", "0");
+		PLVUVis.hide();
+		PLVis.hide();
+		MainVUVIS.hide();
+		VU.start();
+	}else if(getStatus() == 1){										// PLAYING
+		MainVisualizer.setXmlParam("visible", "1");
+		MainShadeVisualizer.setXmlParam("visible", "1");
+		PLVisualizer.setXmlParam("visible", "1");
+		PLVUVis.show();
+		PLVis.show();
+		MainVUVIS.show();
+		VU.start();
 	}
 }
