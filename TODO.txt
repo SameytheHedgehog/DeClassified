@@ -1,3 +1,2 @@
-1. Replace Double-Size button with Mute Button
-2. Create a real font based on the bitmap font the skin uses.
-3. Make the Winamp3 infobar optional
+1. Create a real font based on the bitmap font the skin uses.
+2. Make the Winamp3 infobar optional
