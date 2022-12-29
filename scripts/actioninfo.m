@@ -16,13 +16,11 @@ Global Text InfoTicker;
 Global GuiObject CLBO, SongTicker;
 Global Slider Balance, BalanceEQ;
 Global Layout Normal, ShadeEQ, NormalEQ, NormalPL, ShadePL;
+Global Float VolumeLevel;
 
 Global Slider Seeker;
 Global Int Seeking;
-Global Boolean manual_set, CLBDon, DBsize, dbsizemode;
-
-Function setDoubleSize();
-Function setScaling(Boolean dbsizemode);
+Global Boolean manual_set, CLBDon, Muted, BtnPressed;
 
 #define ISOBANDS "31.5 Hz,63 Hz,125 Hz,250 Hz,500 Hz,1 KHz,2 KHz,4 KHz,8 KHz,16 KHz"
 #define WINAMPBANDS "70 Hz,180 Hz,320 Hz,600 Hz,1 KHz,3 KHz,6 KHz,12 KHz,14 KHz,16 KHz"
@@ -30,6 +28,8 @@ Function setScaling(Boolean dbsizemode);
 System.onScriptLoaded(){
 
 	initDetector();
+	Muted = getPrivateInt(getSkinName(), "Refugee Muted", 0);
+	VolumeLevel = getPrivateInt(getSkinName(), "old_volume", 0);
     WinampConfigGroup eqwcg = WinampConfig.getGroup("{72409F84-BAF1-4448-8211-D84A30A1591A}");
 	int freqmode = eqwcg.getInt("frequencies"); // returns 0 for classical winamp levels, 1 for ISO levels
 
@@ -55,6 +55,13 @@ System.onScriptLoaded(){
 
 	SongTickerTimer = new Timer;
 	SongTickerTimer.setDelay(1000);
+	if (Muted) {
+		SongTickerTimer.start();
+		SongTicker.hide();
+		InfoTicker.show();
+		InfoTicker.setText("Mute ON");
+	}
+	BtnPressed = 0;
 
 	RepeatBtn = frameGroup.findObject("Repeat");
 	ShuffleBtn = frameGroup.findObject("Shuffle");
@@ -64,6 +71,7 @@ System.onScriptLoaded(){
     CLBA = frameGroup.findObject("CLB.A");
 	CLBI = frameGroup.findObject("CLB.I");
 	CLBD = frameGroup.findObject("CLB.D");
+	CLBD.setActivated(Muted);
 	CLBV = frameGroup.findObject("CLB.V");
 	MainWindow = frameGroup.getObject("mainwindow");
 	CLBV1 = MainWindow.getObject("CLB.V1");
@@ -74,12 +82,6 @@ System.onScriptLoaded(){
 	SongTicker = frameGroup.findObject("songticker");
 	InfoTicker = frameGroup.findObject("infoticker");
 
-	setDoubleSize();
-}
-
-setDoubleSize(){
-	dbsizemode = getPrivateInt(getSkinName(), "DeClassified Doublesize mode", 0);
-	setScaling(dbsizemode);
 }
 
 Normal.onAction (String action, String param, Int x, int y, int p1, int p2, GuiObject source)
@@ -122,6 +124,8 @@ SongTickerTimer.onTimer() {
 
 System.onScriptUnloading() {
 	delete SongTickerTimer;
+	setPrivateInt(getSkinName(), "Refugee Muted", Muted);
+	setPrivateInt(getSkinName(), "old_volume", VolumeLevel);
 }
 
 Balance.onSetPosition(int newpos)
@@ -139,10 +143,19 @@ Balance.onSetPosition(int newpos)
 
 System.onvolumechanged(int newvol)
 {
-	SongTickerTimer.start();
-	SongTicker.hide();
-	InfoTicker.show();
-	InfoTicker.setText(translate("Volume") + ": " + integerToString(newvol/2.55) + "%");
+	if (!BtnPressed)
+	{
+		SongTickerTimer.start();
+		SongTicker.hide();
+		InfoTicker.show();
+		InfoTicker.setText(translate("Volume") + ": " + integerToString(newvol/2.55) + "%");
+
+		if (Muted) {
+			CLBD.setActivated(0);
+			Muted = 0;
+		}
+	}
+	BtnPressed = 0;
 }
 
 RepeatBtn.onToggle(boolean on) {
@@ -238,49 +251,24 @@ CLBI.onLeftButtonDown(int x, int y) {
 	}
 }*/
 
-CLBD.onLeftButtonDown(int x, int y){
-	dbsize = getPrivateInt(getSkinName(), "DeClassified Doublesize mode", dbsizemode);
-	SongTickerTimer.start();
-	SongTicker.hide();
-	InfoTicker.show();
-	if(dbsize == 0){
-		InfoTicker.setText("Enable Doublesize Mode");
-		dbsize = 1;
-		CLBD.setXmlParam("image", "CLBDp");
-	}else{
-		InfoTicker.setText("Disable Doublesize Mode"); //no idea why this works but it works
-		dbsize = 0;
-		CLBD.setXmlParam("image", "CLBD");
+CLBD.onLeftClick() {
+	BtnPressed = 1;
+	if (!Muted) {
+		VolumeLevel = System.getVolume();
+		System.setVolume(0);
+		Muted = 1;
+		SongTickerTimer.start();
+		SongTicker.hide();
+		InfoTicker.show();
+		InfoTicker.setText("Enable Mute");
+	} else {
+		System.setVolume(VolumeLevel);
+		Muted = 0;
+		SongTickerTimer.start();
+		SongTicker.hide();
+		InfoTicker.show();
+		InfoTicker.setText("Disable Mute");
 	}
-	//setScaling(dbsize);
-}
-
-CLBD.onLeftButtonUp(int x, int y){
-	setScaling(dbsize);
-}
-
-setScaling(int dbsizemode){
-    if (dbsizemode){
-		Normal.setScale(2);
-		NormalEQ.setScale(2);
-		if(IsWACUP){
-			NormalPL.setScale(2);
-			ShadePL.setScale(2);
-		}else{
-			NormalPL.setScale(1);
-			ShadePL.setScale(1);
-		}
-		shadeeq.setScale(2);
-		CLBD.setXmlParam("image", "CLBDp");
-	}else{
-		Normal.setScale(1);
-		NormalEQ.setScale(1);
-		NormalPL.setScale(1);
-		ShadePL.setScale(1);
-		shadeeq.setScale(1);
-		CLBD.setXmlParam("image", "CLBD");
-	}
-    setPrivateInt(getSkinName(), "DeClassified Doublesize mode", dbsizemode);
 }
 
 CLBV.onLeftButtonDown(int x, int y){

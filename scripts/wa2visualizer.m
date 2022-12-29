@@ -1176,8 +1176,6 @@ setVis (int mode)
 		MainShadeVisualizer.setXmlParam("alpha", "255");
 		MainShadeVULeft.setXmlParam("alpha", "0");
 		MainShadeVURight.setXmlParam("alpha", "0");
-
-		ShowHideVis();
 	}
 	else if (mode == 1)
 	{
@@ -1192,8 +1190,6 @@ setVis (int mode)
 		MainShadeVisualizer.setXmlParam("alpha", "255");
 		MainShadeVULeft.setXmlParam("alpha", "0");
 		MainShadeVURight.setXmlParam("alpha", "0");
-
-		ShowHideVis();
 	}
 	else if (mode == 2)
 	{
@@ -1208,8 +1204,6 @@ setVis (int mode)
 		MainShadeVisualizer.setXmlParam("alpha", "255");
 		MainShadeVULeft.setXmlParam("alpha", "0");
 		MainShadeVURight.setXmlParam("alpha", "0");
-
-		ShowHideVis();
 	}
 	else if(mode == 3){
 		MainVisualizer.setMode(0);
@@ -1223,8 +1217,6 @@ setVis (int mode)
 		MainShadeVisualizer.setXmlParam("alpha", "0");
 		MainShadeVULeft.setXmlParam("alpha", "255");
 		MainShadeVURight.setXmlParam("alpha", "255");
-
-		ShowHideVis();
 	}
 	currentMode = mode;
 }
@@ -1276,7 +1268,6 @@ ShowHideVis(){
 		MainShadeVisualizer.setXmlParam("visible", "1");
 		PLVisualizer.setXmlParam("visible", "1");
 		PLVUVis.show();
-		PLVis.show();
 		MainVUVIS.show();
 		VU.stop();
 	}else if(getStatus() == 0){										// STOPPED
@@ -1284,7 +1275,6 @@ ShowHideVis(){
 		MainShadeVisualizer.setXmlParam("visible", "0");
 		PLVisualizer.setXmlParam("visible", "0");
 		PLVUVis.hide();
-		PLVis.hide();
 		MainVUVIS.hide();
 		VU.start();
 	}else if(getStatus() == 1){										// PLAYING
@@ -1292,7 +1282,6 @@ ShowHideVis(){
 		MainShadeVisualizer.setXmlParam("visible", "1");
 		PLVisualizer.setXmlParam("visible", "1");
 		PLVUVis.show();
-		PLVis.show();
 		MainVUVIS.show();
 		VU.start();
 	}
