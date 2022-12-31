@@ -181,7 +181,7 @@
     colorosc3="150,150,150"
     colorosc4="109,122,165"
     colorosc5="10,75,164"/>
-	<group id="WACUPVU" x="0" y="1"/>
+	<group id="WACUPVU" x="0" y="0"/>
 	<layer id="main.vis.trigger" w="76" h="16" cursor="cur.normal"/>
 </groupdef>
 <groupdef id="WACUPVU">
