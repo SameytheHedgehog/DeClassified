@@ -18,7 +18,7 @@
 	<Menu id="CLB.O" x="11" y="24" w="7" h="8" menu="WA5:Options" normal="CLB.O1" down="CLB.Op" cursor="cur.normal" tooltip="Options Menu"/>
 	<Togglebutton id="CLB.A" x="11" y="32" image="CLBA" downimage="CLBAp" activeimage="CLBAp" cfgattrib="{280876CF-48C0-40BC-8E86-73CE6BB462E5};Always on top" cfgvals="0;1" rectrgn="1" cursor="cur.normal" tooltip="Toggle Always-On-Top"/>
 	<button id="CLB.I" x="11" y="40" image="CLBI" downimage="CLBIp" action="trackinfo" cursor="cur.normal" tooltip="File Info Box"/>
-	<Togglebutton id="CLB.D" x="11" y="48" image="CLBD" downimage="CLBDp" activeimage="CLBDp" rectrgn="1" cursor="cur.normal" tooltip="Toggle Mute"/>
+	<Togglebutton id="CLB.D" x="11" y="48" image="CLBD" downimage="CLBDp" activeimage="CLBDp" rectrgn="1" cursor="cur.normal" tooltip="Toggle Doublesize Mode"/>
 
 	<button id="CLB.V1" x="11" y="56" h="0" w="0" action="TOGGLE" param="guid:avs" cursor="cur.normal"/>
 	<button id="CLB.V2" x="11" y="56" h="0" w="0" action="Vis_Cfg" cursor="cur.normal"/>
@@ -99,12 +99,9 @@
 
 	<!--script file="scripts/classicplaystatus.maki"/-->
 
-	<!--text id="mixrate" display="songsamplerate" x="154" y="43" w="12" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal" color="x50"/>	
-	<text id="bitrate" display="songbitrate" x="109" y="43" w="17" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal" color="x50"//-->	
+	<group id="Winamp2info" visible="0"/>
 
-	<text id="mixrate" display="songinfo" x="108" y="43" w="155" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/>
-
-	<!--script file="scripts/winamp1kbps.maki"/-->
+	<group id="Winamp3info" visible="1"/>
 
 	<button id="wabtn.previous" action="PREV" 	x="16" y="88" 	image="prev"	downimage="prevp"	tooltip="Previous Track" cursor="cur.normal"/>	
 	<button id="wabtn.play" action="PLAY" 		x="39" y="88" 	image="play"	downimage="playp"	tooltip="Play"			cursor="cur.normal"/>	
@@ -125,16 +122,29 @@
 	<button id="eq" action="TOGGLE" param="eq" x="219" y="58" image="player.toggler.eq.disabled" downImage="player.toggler.eq.pressed" activeImage="player.toggler.eq.enabled" tooltip="Toggle Equalizer" cursor="cur.normal"/>
 	<button id="pl" action="TOGGLE" param="guid:pl" x="242" y="58" image="player.toggler.pl.disabled" downImage="player.toggler.pl.pressed" activeImage="player.toggler.pl.enabled" tooltip="Toggle Playlist Editor" cursor="cur.normal"/>
 
-	<!--layer id="mono" x="212" y="41" w="27" h="12" image="player.status.mono.inactive" cursor="cur.normal"/>
-	<layer id="stereo" x="239" y="41" w="29" h="12" image="player.status.stereo.inactive" cursor="cur.normal"/>
-
-	<script file="scripts/monoster.maki"/-->
-
 	<group id="sliders" x="107" y="57" h="13"/>
 
 	<togglebutton id="AboutWinamp" x="251" y="91" w="14" h="16" rectrgn="1" action="TOGGLE" param="guid:{D6201408-476A-4308-BF1B-7BACA1124B12}" cursor="cur.mainmenu" tooltip=""/> <!-- should be cursor="cur.normal" but I thought it was cooler -->
 
 </groupdef>	
+
+<groupdef id="Winamp2info">
+		<text id="mixrate" display="songsamplerate" x="154" y="43" w="12" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal" color="x50"/>	
+		<text id="bitrate" display="songbitrate" x="109" y="43" w="17" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal" color="x50"/>
+
+		<script file="scripts/winamp1kbps.maki"/>
+
+		<layer id="mono" x="212" y="41" w="27" h="12" image="player.status.mono.inactive" cursor="cur.normal"/>
+		<layer id="stereo" x="239" y="41" w="29" h="12" image="player.status.stereo.inactive" cursor="cur.normal"/>
+
+		<script file="scripts/monoster.maki"/>
+
+		<layer id="WA2kbps-khzText" x="128" y="44" w="53" h="6" image="WA2KBPS-KHZ" cursor="cur.normal"/>
+</groupdef>	
+
+<groupdef id="Winamp3info">
+	<text id="mixrate" display="songinfo" x="108" y="43" w="155" h="9" font="wasabi.font.default" fontsize="13" align="left" valign="top" cursor="cur.normal"/>
+</groupdef>
 
 <groupdef id="sliders">
 

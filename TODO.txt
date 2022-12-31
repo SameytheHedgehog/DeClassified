@@ -1,2 +1,1 @@
 1. Create a real font based on the bitmap font the skin uses.
-2. Make the Winamp3 infobar optional

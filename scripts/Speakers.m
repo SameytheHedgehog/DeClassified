@@ -101,11 +101,15 @@ refreshSPKRSettings()
 	{
 		L_GrilleLayer.setXmlParam("visible","0");
 		R_GrilleLayer.setXmlParam("visible","0");
+		L_MinGrilleLayer.setXmlParam("visible","0");
+		R_MinGrilleLayer.setXmlParam("visible","0");
 	}
 	else
 	{
-	L_GrilleLayer.setXmlParam("visible","1");
-	R_GrilleLayer.setXmlParam("visible","1");
+		L_GrilleLayer.setXmlParam("visible","1");
+		R_GrilleLayer.setXmlParam("visible","1");
+		L_GrilleLayer.setXmlParam("visible","1");
+		R_GrilleLayer.setXmlParam("visible","1");
 	}
 
 	speaker_mini = getPrivateInt(getSkinName(), "Speaker Mini", 0);
@@ -146,25 +150,25 @@ SpkrVU.onTimer() {
 
 	if (speaker_mini == 0)
 	{
-//	==== Left ====
-	L_Tweeter_VU.gotoFrame(level1T);
-	L_Midrange_VU.gotoFrame(level1M);
-	L_Woofer_VU.gotoFrame(level1W);
+	//	==== Left ====
+		L_Tweeter_VU.gotoFrame(level1T);
+		L_Midrange_VU.gotoFrame(level1M);
+		L_Woofer_VU.gotoFrame(level1W);
 
-//	==== Right ====
-	R_Tweeter_VU.gotoFrame(level1T);
-	R_Midrange_VU.gotoFrame(level1M);
-	R_Woofer_VU.gotoFrame(level1W);
+	//	==== Right ====
+		R_Tweeter_VU.gotoFrame(level1T);
+		R_Midrange_VU.gotoFrame(level1M);
+		R_Woofer_VU.gotoFrame(level1W);
 	}
 	else
 	{
-	L_MinTweeter_VU.gotoFrame(level1T);
-	L_MinMidrange_VU.gotoFrame(level1M);
-	L_MinWoofer_VU.gotoFrame(level1W);
+		L_MinTweeter_VU.gotoFrame(level1T);
+		L_MinMidrange_VU.gotoFrame(level1M);
+		L_MinWoofer_VU.gotoFrame(level1W);
 
-	R_MinTweeter_VU.gotoFrame(level1T);
-	R_MinMidrange_VU.gotoFrame(level1M);
-	R_MinWoofer_VU.gotoFrame(level1W);
+		R_MinTweeter_VU.gotoFrame(level1T);
+		R_MinMidrange_VU.gotoFrame(level1M);
+		R_MinWoofer_VU.gotoFrame(level1W);
 	}
 }
 
@@ -246,6 +250,7 @@ ProcessMenuResult (int a)
 			L_SpeakerContainer.switchToLayout("minimised");
 			R_SpeakerContainer.switchToLayout("minimised");
 		}
+		SpkrVU.start();
 	}
 	else if (a == 103)
 	{
@@ -264,38 +269,50 @@ ProcessMenuResult (int a)
 //	========	Right-click action on Left Speaker	========
 L_SpeakerTrigger.onRightButtonUp (int x, int y)
 {
+	speaker_closed = 0;
 	Left_setSPKRModeRBD();
 }
 L_MinSpeakerTrigger.onRightButtonUp (int x, int y)
 {
+	speaker_closed = 0;
 	Left_setSPKRModeRBD();
 }
 
 R_SpeakerTrigger.onRightButtonUp (int x, int y)
 {
+	speaker_closed = 0;
 	Right_setSPKRModeRBD();
 }
 R_MinSpeakerTrigger.onRightButtonUp (int x, int y)
 {
+	speaker_closed = 0;
 	Right_setSPKRModeRBD();
 }
 
 //	========	Make sure the Right Speaker opens too	========
 L_frameGroup.onSetVisible(boolean onoff)
 {
-	if (onoff)
+	if (onoff == 1)
 	{
 	SpkrVU.start();
-		if (speaker_mini == 0)
-		{
-		System.getContainer("right-speaker").show();
-		speaker_closed = 0;
-		}
-		else
-		{
-		System.getContainer("right-speaker").show();
-		speaker_closed = 0;
-		}
+	System.getContainer("right-speaker").show();
+	speaker_closed = 0;
+	}
+	else
+	{
+	System.getContainer("right-speaker").hide();
+	speaker_closed = 1;
+	SpkrVU.stop();
+
+	}
+}
+L_frameGroupMini.onSetVisible(boolean onoff)
+{
+	if (onoff == 1)
+	{
+	SpkrVU.start();
+	System.getContainer("right-speaker").show();
+	speaker_closed = 0;
 	}
 	else
 	{

@@ -71,6 +71,8 @@
 	<bitmap id="repp2" file="skin/repeatone.png" x="0" y="15" w="28" h="15"/>
 	<bitmap id="repa2" file="skin/shufrep.png" x="0" y="0" w="28" h="15"/>
 	<!-- NStates Button images End-->
+	
+	<bitmap id="WA2KBPS-KHZ" file="skin/winamp2kbs.png" x="0" y="0" w="53" h="6"/>
 
 	<bitmap id="player.toggler.eq.disabled" file="skin/shufrep.png" x="0" y="61" h="12" w="23"/>
 	<bitmap id="player.toggler.eq.pressed" file="skin/shufrep.png" x="46" y="61" h="12" w="23"/>

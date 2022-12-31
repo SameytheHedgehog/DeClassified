@@ -32,6 +32,7 @@ Global GuiObject PlayIndicator, Songticker, Infoticker;
 
 Global Group MainWindow, MainClassicVis, Clutterbar;
 Global Group PLWindow, MainShadeWindow, PLVis, MainVUVIS, PLVUVis;
+Global Group Winamp2info, Winamp3info;
 
 Global Vis MainVisualizer, MainShadeVisualizer, PLVisualizer;
 Global AnimatedLayer MainShadeVULeft, MainShadeVURight, MainVULeft, MainVURight, MainVUPeakLeft, MainVUPeakRight;
@@ -53,7 +54,7 @@ Global PopUpMenu vumenu2;
 Global PopUpMenu vusettings;
 Global PopUpMenu firemenu;
 
-Global Int currentMode, currentMode2, a_falloffspeed, p_falloffspeed, osc_render, ana_render, a_coloring, v_fps, smoothvu, PlaylistRBD, vu_coloring;
+Global Int currentMode, currentMode2, a_falloffspeed, p_falloffspeed, osc_render, ana_render, a_coloring, v_fps, smoothvu, PlaylistRBD, vu_coloring, Winamp3Mode;
 Global Boolean show_peaks, show_vupeaks, vu_gravity, isShade, playLED, WA265SPEED, SKINNEDFONT;
 Global layer MainTrigger, MainShadeTrigger, PLTrigger;
 
@@ -77,6 +78,9 @@ System.onScriptLoaded()
 	MainClassicVis = MainWindow.findObject("waclassicvis");
 	MainVisualizer = MainClassicVis.getObject("wa.vis");
 	MainTrigger = MainClassicVis.getObject("main.vis.trigger");
+	
+	Winamp2info	= MainWindow.findObject("Winamp2info");
+	Winamp3info	= MainWindow.findObject("Winamp3info");
 
 	MainShadeWindow = getContainer("Main").getLayout("shade");
 	MainShadeVisualizer = MainShadeWindow.findObject("wa.vis");
@@ -356,6 +360,7 @@ setVisModeRBD(){
 	visMenu.addSeparator();
 	visMenu.addCommand("Use bitmap font for main title display (no int. support)", 106, SKINNEDFONT == 1, 0);
 	visMenu.addCommand("Playback Indicator", 103, playLED == 1, 0);
+	visMenu.addCommand("Winamp3 style mix/bitrate info", 111, Winamp3Mode == 1, 0);
 
 	visMenu.addSeparator();
 
@@ -464,6 +469,18 @@ refreshVisSettings()
 	SKINNEDFONT = getPrivateInt(getSkinName(), "DeClassified Skinned Font", 1);
 	vp_falloffspeed = getPrivateInt(getSkinName(), "DeClassified VU peaks falloff", 2);
 	vu_gravity = getPrivateInt(getSkinName(), "DeClassified VU Peak Gravity", 1);
+
+	Winamp3Mode = getPrivateInt(getSkinName(), "DeClassified Winamp3 Mode", 0);
+	if (Winamp3Mode == 1)
+	{
+	Winamp2info.setXmlParam("visible", "0");
+	Winamp3info.setXmlParam("visible", "1");
+	}
+	else
+	{
+	Winamp2info.setXmlParam("visible", "1");
+	Winamp3info.setXmlParam("visible", "0");
+	}
 
 		vu_falloffspeed_peak = (vp_falloffspeed/100)+0.02; //magic number
 
@@ -826,6 +843,22 @@ ProcessMenuResult (int a)
 	{
 		vu_gravity = (vu_gravity - 1) * (-1);
 		setPrivateInt(getSkinName(), "DeClassified VU Peak Gravity", vu_gravity);
+	}
+
+	else if (a == 111)
+	{
+		Winamp3Mode = (Winamp3Mode - 1) * (-1);
+		setPrivateInt(getSkinName(), "DeClassified Winamp3 Mode", Winamp3Mode);
+		if (Winamp3Mode == 1)
+		{
+		Winamp2info.setXmlParam("visible", "0");
+		Winamp3info.setXmlParam("visible", "1");
+		}
+		else
+		{
+		Winamp2info.setXmlParam("visible", "1");
+		Winamp3info.setXmlParam("visible", "0");
+		}
 	}
 
 	else if (a >= 200 && a <= 204)
