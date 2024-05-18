@@ -143,9 +143,9 @@ System.onscriptunloading() {
 
 //	========	Changes the Speakers to the beat	========
 SpkrVU.onTimer() {
-	TweetVUBand = (getVisBand(0, 50)+getVisBand(0, 56)+getVisBand(0, 62)+getVisBand(0, 68)+getVisBand(0, 75)/5);
-	MidRVUband = (getVisBand(0, 25)+getVisBand(0, 31)+getVisBand(0, 37)+getVisBand(0, 43)+getVisBand(0, 49)/5);
-	WoofVUband = (getVisBand(0, 0)+getVisBand(0, 6)+getVisBand(0, 12)+getVisBand(0, 18)+getVisBand(0, 24)/5);
+	TweetVUBand = (getVisBand(0, 50)+getVisBand(0, 56)+getVisBand(0, 62)+getVisBand(0, 69)+getVisBand(0, 75)/5);
+	MidRVUband = (getVisBand(0, 12)+getVisBand(0, 21)+getVisBand(0, 31)+getVisBand(0, 40)+getVisBand(0, 50)/5);
+	WoofVUband = (getVisBand(0, 0)+getVisBand(0, 4)+getVisBand(0, 8)+getVisBand(0, 12)+getVisBand(0, 16)/5);
 
 	level1T = (TweetVUBand*(L_Tweeter_VU.getLength())/256);
 	level1M = (MidRVUband*(L_Midrange_VU.getLength())/256);
