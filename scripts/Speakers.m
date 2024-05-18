@@ -1,10 +1,10 @@
 /*---------------------------------------------------
 -----------------------------------------------------
 Filename:	speakers.m
-Version:	1.0
+Version:	1.1
 
 Type:		maki
-Date:		12-15-2022
+Date:		05-18-2024
 Author:		Samey the Hedgehog
 
 Note:		Simple speaker script that has a tweeter,
@@ -35,9 +35,16 @@ Global AnimatedLayer R_Tweeter_VU, R_Midrange_VU, R_Woofer_VU, R_MinTweeter_VU, 
 Global Int TweetVUBand, MidRVUband, WoofVUband;
 Global Int level1T, level1M, level1W;
 
-Global Boolean speaker_grille, speaker_mini, speaker_closed, onoff;
+Global Boolean speaker_grille, speaker_mini, speaker_closed, onoff, mini_trans;
 
 System.onScriptLoaded() {
+
+// === Setup Animation Timer ===
+	SpkrVU = new Timer;
+	SpkrVU.setDelay(10);
+	SpkrVU.start();
+
+// === Grab Speaker containers & Layouts ===
 	L_SpeakerContainer = getContainer("left-speaker");
     L_frameGroup = L_SpeakerContainer.getLayout("normal");
 	L_frameGroupMini = L_SpeakerContainer.getLayout("minimised");
@@ -85,11 +92,6 @@ System.onScriptLoaded() {
 
 	R_MinSpeakerTrigger = R_MiniGroup.getObject("R_MiniSpeakerBG");
 
-
-	SpkrVU = new Timer;
-	SpkrVU.setDelay(10);
-	SpkrVU.start();
-
 	refreshSPKRSettings();
 }
 
@@ -131,6 +133,7 @@ refreshSPKRSettings()
 	System.getContainer("right-speaker").hide();
 	SpkrVU.stop();
 	}
+	mini_trans = 0;
 }
 
 //	========	stops and deletes the timer when the script unloads	========
@@ -242,15 +245,18 @@ ProcessMenuResult (int a)
 
 		if (speaker_mini == 0)
 		{
+			mini_trans = 1;
 			L_SpeakerContainer.switchToLayout("normal");
 			R_SpeakerContainer.switchToLayout("normal");
 		}
 		else
 		{
+			mini_trans = 1;
 			L_SpeakerContainer.switchToLayout("minimised");
 			R_SpeakerContainer.switchToLayout("minimised");
 		}
 		SpkrVU.start();
+		mini_trans = 0;
 	}
 	else if (a == 103)
 	{
@@ -292,33 +298,40 @@ R_MinSpeakerTrigger.onRightButtonUp (int x, int y)
 //	========	Make sure the Right Speaker opens too	========
 L_frameGroup.onSetVisible(boolean onoff)
 {
-	if (onoff == 1)
+	if (mini_trans == 0)
 	{
-	SpkrVU.start();
-	System.getContainer("right-speaker").show();
-	speaker_closed = 0;
-	}
-	else
-	{
-	System.getContainer("right-speaker").hide();
-	speaker_closed = 1;
-	SpkrVU.stop();
+		if (onoff == 1)
+		{
+		SpkrVU.start();
+		System.getContainer("right-speaker").show();
+		speaker_closed = 0;
+		}
+		else
+		{
+		System.getContainer("right-speaker").hide();
+		speaker_closed = 1;
+		SpkrVU.stop();
 
+		}
 	}
 }
+
 L_frameGroupMini.onSetVisible(boolean onoff)
 {
-	if (onoff == 1)
+	if (mini_trans == 0)
 	{
-	SpkrVU.start();
-	System.getContainer("right-speaker").show();
-	speaker_closed = 0;
-	}
-	else
-	{
-	System.getContainer("right-speaker").hide();
-	speaker_closed = 1;
-	SpkrVU.stop();
+		if (onoff == 1)
+		{
+		SpkrVU.start();
+		System.getContainer("right-speaker").show();
+		speaker_closed = 0;
+		}
+		else
+		{
+		System.getContainer("right-speaker").hide();
+		speaker_closed = 1;
+		SpkrVU.stop();
 
+		}
 	}
 }
