@@ -1,7 +1,7 @@
 /*---------------------------------------------------
 -----------------------------------------------------
 Filename:	speakers.m
-Version:	1.1
+Version:	1.2
 
 Type:		maki
 Date:		05-18-2024
@@ -110,8 +110,8 @@ refreshSPKRSettings()
 	{
 		L_GrilleLayer.setXmlParam("visible","1");
 		R_GrilleLayer.setXmlParam("visible","1");
-		L_GrilleLayer.setXmlParam("visible","1");
-		R_GrilleLayer.setXmlParam("visible","1");
+		L_MinGrilleLayer.setXmlParam("visible","1");
+		R_MinGrilleLayer.setXmlParam("visible","1");
 	}
 
 	speaker_mini = getPrivateInt(getSkinName(), "Speaker Mini", 0);
@@ -144,8 +144,8 @@ System.onscriptunloading() {
 //	========	Changes the Speakers to the beat	========
 SpkrVU.onTimer() {
 	TweetVUBand = (getVisBand(0, 50)+getVisBand(0, 56)+getVisBand(0, 62)+getVisBand(0, 69)+getVisBand(0, 75)/5);
-	MidRVUband = (getVisBand(0, 12)+getVisBand(0, 21)+getVisBand(0, 31)+getVisBand(0, 40)+getVisBand(0, 50)/5);
-	WoofVUband = (getVisBand(0, 0)+getVisBand(0, 4)+getVisBand(0, 8)+getVisBand(0, 12)+getVisBand(0, 16)/5);
+	MidRVUband = (getVisBand(0, 16)+getVisBand(0, 21)+getVisBand(0, 31)+getVisBand(0, 40)+getVisBand(0, 50)/5);
+	WoofVUband = (getVisBand(0, 3)+getVisBand(0, 5)+getVisBand(0, 7)+getVisBand(0, 9)+getVisBand(0, 12)/5);
 
 	level1T = (TweetVUBand*(L_Tweeter_VU.getLength())/256);
 	level1M = (MidRVUband*(L_Midrange_VU.getLength())/256);

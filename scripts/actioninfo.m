@@ -420,12 +420,18 @@ system.onEqBandChanged(int band, int value)
 
 system.onEqPreampChanged(int value)
 {
-	slider s = frameGroupEQ.findObject("preamp");
-	value = s.getPosition(); // Somehow this function returns a range from [-127;125] with hotpos -3, so we take the slider instead
 	String t = "EQ: " + translate("Preamp:") + " ";
 	Float f = value;
-	f = f / 10.5;
-	if (f >= -3) t += "+"+floattostring(f, 1) + " "+ translate("dB");
+	if (f <= -3) {
+		if (f < -3) {
+			f = (f / 10.58333333333333);
+		}
+		else f = 0;
+	}
+	else {
+		f = (f / 10.41666666666667);
+	}	
+	if (f > 0) t += "+"+floattostring(f, 1) + " "+ translate("dB");
 	else t += floattostring(f, 1) + " "+ translate("dB");
 	
 	normal.sendAction("showinfo", t, 0,0,0,0);
